@@ -1,0 +1,216 @@
+<html><head><meta charset="utf-8"><title>09 图形工具使用：各系统通过图形管理git代码仓库-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        09 图形工具使用：各系统通过图形管理git代码仓库
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-12 10:34:26
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img4.mukewang.com/5d9bf70f0001fe8406400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">我们有力的道德就是通过奋斗取得物质上的成功；这种道德既适用于国家，也适用于个人。<p class="author">——罗素</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Windows 中很多人都习惯使用图形化操作，在这一节中，我教大家怎么使用图形化来操作 Git，主要包含图形化工具安装、图形化的常用操作，经过前面章节的知识后，图形化操作理解起来就非常简单；</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">大部分般情况下，我依然并不推荐大家使用图形化操作，因为命令行操作用习惯之后，操作速度会更快。</p>
+</div><div class="cl-preview-section"><h2 id="安装软件" style="font-size: 30px;">9.1 安装软件</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">首先，我们需要安装一个图形化的 Git 管理工具，在 Windows 中 <code>TortoiseGit</code> 非常流行，因此，我们在这节中主要使用它来进行讲解，主要包含主程序安装、配置向导、软件汉化三个部分。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下载地址：</p>
+</div><div class="cl-preview-section"><pre><code>https://download.tortoisegit.org/tgit/2.8.0.0/TortoiseGit-2.8.0.0-64bit.msi
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="主程序安装">9.1.1 主程序安装</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">打开安装包，可以看到一个安装向导，点击 <code>next</code> 按钮即可，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/01.png" data-original="http://startgit.songboy.net/09/01.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当点击下一步之后，会进入一个确认安装位置界面，我一般喜欢将软件安装到 D 盘当中，你也可以默认，然后单击 <code>next</code> 按钮，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/02.png" data-original="http://startgit.songboy.net/09/02.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在选择软件安装位置，点击下一步之后，就会开始进行安装，安装的过程大概在 30 秒作业，具体时间会根据你电脑的 CPU 和硬盘速度所决定，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/03.png" data-original="http://startgit.songboy.net/09/03.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="配置向导">9.1.2 配置向导</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当软件自己安装完成之后，就会进入配置向导页面，在这个页面当中会让你选择语言，但因为你还没有安装语言包，所以其实只有一个 <code>English</code> 可以选择，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/11.png" data-original="http://startgit.songboy.net/09/11.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上图点击下一步之后，又会出现一些提示信息，无需理会它直接点击下一步，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/12.png" data-original="http://startgit.songboy.net/09/12.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着会进入一个关键的页面，小乌龟是基于 Git 的，所以这里需要你选择 Git 的安装位置，不过一般他会自动识别 Git 目录的，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/13.png" data-original="http://startgit.songboy.net/09/13.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面，我们学过使用命令配置昵称和邮箱，使用图形界面也同样会让你输入昵称和邮箱，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/14.png" data-original="http://startgit.songboy.net/09/14.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着，会让你配置一些权限认证方式，这里你可以忽略它，直接点击下一步即可，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/15.png" data-original="http://startgit.songboy.net/09/15.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="软件汉化">9.1.3 软件汉化</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">打开汉化的可执行文件之后，会弹出一个欢迎页，点击 <code>下一步</code> 按钮即可，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/16.png" data-original="http://startgit.songboy.net/09/16.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在欢迎页点击下一步之后，会自动进行汉化，汉化完成之后会提示你汉化完成，如下图所示<br>
+<img class="" src="http://startgit.songboy.net/09/17.png" data-original="http://startgit.songboy.net/09/17.png" alt="image"></p>
+</div><div class="cl-preview-section"><h2 id="图形基本操作" style="font-size: 30px;">9.2 图形基本操作</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Git 的功能比较多，这里讲解图形化的几个常规操作，主要是拉取代码、提交代码、推送代码。</p>
+</div><div class="cl-preview-section"><h3 id="克隆clone代码">9.2.1 克隆 (clone) 代码</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在一个文件里面单击鼠标右键，可以看到，右键菜单当中多出了三个选项，其中有一个 <code>Git 克隆...</code>，这个其实对应的就是命令行中的 <code>git clone</code>，如下图所示<br>
+<img class="" src="http://startgit.songboy.net/09/21.png" data-original="http://startgit.songboy.net/09/21.png" alt="image"><br>
+在右键菜单中，选择 <code>git clone</code> 之后，会弹出一个确认框，再确认框中会显示你要拉去仓库的地址，以及本地存放路径等相关信息（如果你剪贴板中有一个 Git 地址，它会自动将地址放入确认框中)，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/22.png" data-original="http://startgit.songboy.net/09/22.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在确认框中点击<code>确定</code>按钮，Git 就会开始工作，如果你是通过 HTTPS 拉取，并且第一次去拉取会弹出一个验证框，让你输入用户名和密码，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/09/23.png" data-original="http://startgit.songboy.net/09/23.png" alt="image"><br>
+在弹出的认证框中，输入你的认证用户名和密码，然后点击确定，就完成了拉取步骤，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/09/24.png" data-original="http://startgit.songboy.net/09/24.png" alt="image"><br>
+在图中可以看到成功的提示，以及整个克隆代码的时间。</p>
+</div><div class="cl-preview-section"><h3 id="拉取pull代码">9.2.2 拉取 (pull) 代码</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/25.png" data-original="http://startgit.songboy.net/09/25.png" alt="image"><br>
+<img class="" src="http://startgit.songboy.net/09/26.png" data-original="http://startgit.songboy.net/09/26.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/27.png" data-original="http://startgit.songboy.net/09/27.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="提交commit代码">9.2.3 提交 (commit) 代码</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在修改文件后，如果我们在命令行中提交代码的命令为 <code>git commit 文件名 -m '备注'</code>, 在图形操作中则是在 Git 的工作目录中，单击鼠标右键，然后在弹出的菜单中选择 <code>Git 提交...</code> 选项，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/28.png" data-original="http://startgit.songboy.net/09/28.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着会出现一个确认框，然你输出注释，下面还有一个变更列表，在变更列表中你可以勾选需要提交的文件，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/09/29.png" data-original="http://startgit.songboy.net/09/29.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="推送push代码">9.2.4 推送 (push) 代码</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在点击<code>提交</code>按钮之后，会看到一个提交成功的输出信息，在下方还有一个<code>推送</code>按钮，点击这个按钮就会将代码推送到远端仓库，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/09/30.png" data-original="http://startgit.songboy.net/09/30.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="查看历史修改">9.3 查看历史修改</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Git 命令行与图形界面操作我觉得大部分情况下都是命令行比较好用，但也有少数几个功能图形化更加有优势，比如查看仓库历史改动情况用命令行操作起来比较繁琐，而图形化操作就比较方便；下面介绍主要介绍怎么使用图形化查看提交记录和对比代码差异。</p>
+</div><div class="cl-preview-section"><h3 id="提交记录">9.3.1 提交记录</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候你提交了代码，单想回过头来看下刚查提交了哪几个文件，这个时候你可以在代码仓库中，单击鼠标右键，在 Git 的选项中找到 <code>显示日志</code> 这个选项，如下图所示<br>
+<img class="" src="http://startgit.songboy.net/09/31.png" data-original="http://startgit.songboy.net/09/31.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="查看详情">9.3.2 查看详情</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">点击显示日志之后，会弹出一个窗口，在窗口主要有两部分内容，提交日志，和变动详情如下图所示<br>
+<img class="" src="http://startgit.songboy.net/09/32.png" data-original="http://startgit.songboy.net/09/32.png" alt="image"><br>
+在图中可以看到提交记录中会显示操作类型、备注信息、作者、日期等信息，在下方的窗口中则是当前选中的提交记录改动详情。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">9.4 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节中主要讲到了如何安装 Git 的图形化工具、以及工具的常用操作方式，有以下几点需要注意：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">安装 TortoiseGit 工具之前需要先安装 Git</li>
+<li style="font-size: 20px; line-height: 38px;"> 图形化工具操作速度，不如命令行操作</li>
+<li style="font-size: 20px; line-height: 38px;">比较适合用于最终历史改动记录</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1015">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            08 忽略指定文件或目录：排除项目配置文件
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1017">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            10 分支管理：掌握快速切换分支和新建分支能力
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img1.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

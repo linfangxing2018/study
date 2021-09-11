@@ -1,0 +1,231 @@
+<html><head><meta charset="utf-8"><title>16 本地覆盖远端：把本地仓库覆盖到远程仓库-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        16 本地覆盖远端：把本地仓库覆盖到远程仓库
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-28 11:02:03
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img.mukewang.com/5daee07b0001f54406400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">学习从来无捷径，循序渐进登高峰。 <p class="author">—— 高永祚</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在使用 Git 的过程中可能会遇到这样的场景需要覆盖远程仓库，比如说，不小心把错误的代码推送到远程仓库，这个时候想把错误的代码撤销有两种方式。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">第一种是代码层面覆盖，就是我们再次修改代码，把错误的代码纠正，然后再次提交，然后推送到远程仓库中。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">第二种是将方式则是将记录覆盖，我们使用 <code>git reset 版本号</code> 命令恢复到上一个版本，然后重新提交，默认情况下 Git 会拒绝你的提交，因为提交的版本号比远程仓库的落后，所以需要用上强制提交方式，也就是本节需要提到的。</p>
+</div><div class="cl-preview-section"><h2 id="覆盖远程" style="font-size: 30px;">16.1 覆盖远程</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">两种方式的区别是第一种方式会在 Git 中记录两个无效的提交，而第二种方式则不会显示错误的提交记录；有些情况下你可能将一些敏感信息不小心提交上去了，如果第一种处理方式必然会泄露出去，而第二种则可以避免，下面我将两种方式逐一演示。</p>
+</div><div class="cl-preview-section"><h3 id="场景复现">16.1.1 场景复现</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在我新建一个文件，模拟成数据库配置文件泄露的样子，执行的命令行如下：</p>
+</div><div class="cl-preview-section"><pre><code>mkdir config &amp;&amp; echo "user = root  \n password = root" &gt; config/dbconfig.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">添加文件后，再将代码提交到本地仓库当中，执行命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git add . &amp;&amp; git commit config  -m '模拟配置文件泄露'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行的截图如下：<br>
+<img class="" src="http://startgit.songboy.net/16/01.png" data-original="http://startgit.songboy.net/16/01.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">可以看到已经新建了一个 <code>dbconfig.php</code> 文件，接着我再把代码推送到远程仓库，命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git push
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行截图如下：<br>
+<img class="" src="http://startgit.songboy.net/16/02.png" data-original="http://startgit.songboy.net/16/02.png" alt="image"><br>
+在图中的信息可以看出，我已经成功将本地仓库推送到远程仓库中。</p>
+</div><div class="cl-preview-section"><h3 id="代码覆盖">16.1.2 代码覆盖</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">提交之后，我突然发现我不应该把配置文件提交上去，因为里面包含了一些很重要的信息，为了不让人发现这个文件的内容，于是我将这个文件删除，然后再次提交，执行命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>rm config/dbconfig.php  &amp;&amp; git diff
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令截图如下：<br>
+<img class="" src="http://startgit.songboy.net/16/03.png" data-original="http://startgit.songboy.net/16/03.png" alt="image"><br>
+在图中可以看到，执行命令后 <code>dbconfig.php</code> 里面的内容已删除，接着我将修改的内容提交到本地仓库当中去，执行命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git add . &amp;&amp; git commit config  -m '覆盖代码并推送'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令后的截图如下：<br>
+<img class="" src="http://startgit.songboy.net/16/04.png" data-original="http://startgit.songboy.net/16/04.png" alt="image"><br>
+成功提交到本地仓库后，我再把本地仓库推送到远程仓库中，执行命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git push
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令后的截图如下：<br>
+<img class="" src="http://startgit.songboy.net/16/05.png" data-original="http://startgit.songboy.net/16/05.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">可以看到已经成功把本地仓库推送到了远程仓库当中去，接着我去远端仓库中去查看代码，验证一下是不是已经看不到配置文件了，下图为远程仓库的 web 页面。<br>
+<img class="" src="http://startgit.songboy.net/16/06.png" data-original="http://startgit.songboy.net/16/06.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在远端仓库的 web 页面，可以看到 dbconfig 文件夹都不见了，说明已经成功了</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我打开远端仓库的历史记录，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/16/07.png" data-original="http://startgit.songboy.net/16/07.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但是在历史记录中依然可以看到修改记录，点击修改详情，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/16/08.png" data-original="http://startgit.songboy.net/16/08.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到误提交的内容依然可以被看到，这里得出一个结论，代码覆盖虽然可以将代码回滚，但是提交记录仍然会被保留，所以不适合敏感信息被提交上来的情况。</p>
+</div><div class="cl-preview-section"><h3 id="记录覆盖">16.1.3 记录覆盖</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">使用代码覆盖的方式虽然可以将最新的代码修改回来，但在敏感信息泄露场景下依然不能满足，如果要彻底的让记录不留痕迹，我们可以使用记录覆盖的方式。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">首先，我们通过查看提交记录得到上一次记录 hash 值，执行的命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后终端中返回的信息，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/16/09.png" data-original="http://startgit.songboy.net/16/09.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到，我们要把版本恢复到上上次，那么对应的 hash 值便是<code>53029934e40db5b9f77705969902229251a8ba95</code>，我们首先恢复到指定版本，并通过查看提交记录来判断是否恢复成功，执行命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git reset 53029934e40db5b9f77705969902229251a8ba95 &amp;&amp; git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/16/10.png" data-original="http://startgit.songboy.net/16/10.png" alt="image"><br>
+在图中可以看到，已经将代码恢复到历史版本了，接着我们使用 <code>git push</code>将本地仓库推送到远程，执行命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git push
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/16/11.png" data-original="http://startgit.songboy.net/16/11.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到提交并没有成功，因为提交的版本号落后于远程版本；如果我们需要提交需要用到强制推送命令，强制推送参考如下：</p>
+</div><div class="cl-preview-section"><pre><code>git push -f
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/16/12.png" data-original="http://startgit.songboy.net/16/12.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到已经提交成功，至此我们将错误的提交记录已经完全覆盖销毁。</p>
+</div><div class="cl-preview-section"><h2 id="权限控制" style="font-size: 30px;">16.2 权限控制</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Git 默认情况下允许强制推送，但这样也有可能造成一些安全隐患，比如某个开发者做了一些操作，不想让其他人知道，他就可以使用强制推送的特点来抹掉痕迹，或者直接将整个远程仓库代码恢复到初始化的状态等问题。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们可以设置远程仓库的强制推送权限，这里以码云平台为例，在项目的 <code>管理</code>-&gt;<code>基本设置</code> 中。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/16/13.png" data-original="http://startgit.songboy.net/16/13.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">可以在下方看到一个强制推送的权限选项，默认是允许强制推送的，当勾选禁止强制推送则不能强制推送。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/16/14.png" data-original="http://startgit.songboy.net/16/14.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在公司团队中通常采用的是 gitlab 搭建，这里将 gitlab 设置的界面的地址发出来：</p>
+</div><div class="cl-preview-section"><pre><code>https://gitlab.eoffcn.com/video/php/record-edge-cloud/settings/repository
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">打开后可以看到一个设置权限的界面，选择一个分支分配给不同身份的组不同权限：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/16/15.png" data-original="http://startgit.songboy.net/16/15.png" alt="image"></p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">16.3 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节中主要讲解了，将本地仓库覆盖到远程的两种方法，以及安全权限配置，需要注意的三点分别是：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">代码覆盖只是修改远程最新的代码，其他人仍然可以在历史中找到提交记录</li>
+<li style="font-size: 20px; line-height: 38px;">记录覆盖将彻底将远程的提交覆盖，包含了代码和提交记录</li>
+<li style="font-size: 20px; line-height: 38px;">强制推送权限最好只交给一个人去控制，否则容易引发一些安全问题</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1022">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            15 配置多个远端仓库：把代码推送到不同的服务器
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1024">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            17 远端覆盖本地：把远端代码覆盖本地
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img3.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

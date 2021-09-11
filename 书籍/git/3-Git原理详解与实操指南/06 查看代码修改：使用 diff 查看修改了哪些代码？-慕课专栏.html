@@ -1,0 +1,209 @@
+<html><head><meta charset="utf-8"><title>06 查看代码修改：使用 diff 查看修改了哪些代码？-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        06 查看代码修改：使用 diff 查看修改了哪些代码？
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-09-30 10:53:20
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img.mukewang.com/5d888a4e0001859a06400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">成功＝艰苦的劳动＋正确的方法＋少谈空话。<p class="author">——爱因斯坦</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上面一节中，我们学习了通过 <code>git status</code> 命令查看文件修改列表，但很多时候并不能满足需求，比如说，我想看某一个文件具体修改了什么内容。</p>
+</div><div class="cl-preview-section"><h2 id="名词定义" style="font-size: 30px;">6.1 名词定义</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在学习 Git 的 <code>diff</code> 命令之前，我们先来统一 一下两个名词的理解，分别是工作区和暂存区。</p>
+</div><div class="cl-preview-section"><h3 id="工作区">6.1.1 工作区</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">工作区，指的是当前正在编辑的文件，还没有修改的内容通过 <code>git add</code> 命令暂存起来；比如我现在修改了 <code>index.php</code> 文件的一行代码，没有执行 <code>git add index.php</code> 命令，那么 index.php 便处于工作区状态。</p>
+</div><div class="cl-preview-section"><h3 id="暂存区">6.1.2 暂存区</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">暂存区，指的是文件的修改已经通过 <code>git add</code> 命令临时存储到版本记录里了，但还没有正式通过 <code>git commit</code> 提交的阶段；比如我现在新增一个 <code>test.php</code> 文件，使用了 <code>git add test.php</code> 命令，那么此时， test.php 文件的改动就已经进入到了暂存区。</p>
+</div><div class="cl-preview-section"><h2 id="比较工作区变动" style="font-size: 30px;">6.2  比较工作区变动</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在我编辑了 <code>index.php</code> 文件，并且在里面加入了内容，如果我想通过 git 命令查看增加了哪些内容，参考命令如下</p>
+</div><div class="cl-preview-section"><pre><code>git diff 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令之后，绿色部分代表增加的内容，红色部分代表删除的内容，执行结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/06/01.png" data-original="http://startgit.songboy.net/06/01.png" alt="image"><br>
+在图中可以看到在 index.php 中增加了 <code>zhangsan</code>。</p>
+</div><div class="cl-preview-section"><h2 id="比较暂存区变动" style="font-size: 30px;">6.3 比较暂存区变动</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有些时候，我们可能已经通过 <code>git add</code> 命令，将某些文件从工作区添加到暂存区，但又想回过头，来看此文件刚才改动哪些内容的场景；比如下图中是我刚才新建了一个 <code>diff.php</code> 文件，并且已经添加到暂存区，如下图执行了 <code>git status</code> 命令结果所示：<br>
+<img class="" src="http://startgit.songboy.net/06/02.png?1" data-original="http://startgit.songboy.net/06/02.png?1" alt="image"><br>
+但我突然发现，我已经忘记这个文件里到底有哪些内容被改变了，于是我使用了 <code>git status</code> 命令查看变动的内容，执行结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/06/03.png?1" data-original="http://startgit.songboy.net/06/03.png?1" alt="image"><br>
+在 Git 的返回信息中却无法看到修改详情，原因是因为 diff.php 文件被提交到暂存区之后，工作区并没有再次改动，此时工作区与暂存区一致，当然就不能看出改动情况了。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这个时候，如果想要看 <code>diff.php</code> 文件里面修改了什么内容，就不是再把工作区和暂存区进行对比了，而是需要把暂存区与版本库最近一次 commit 的内容进行比较，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff --cached  diff.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行结果如下图所示<br>
+<img class="" src="http://startgit.songboy.net/06/04.png?12" data-original="http://startgit.songboy.net/06/04.png?12" alt="image"><br>
+在图中可以看出，diff.php 中新增了一行代码，内容为 <code>lisi</code> 。</p>
+</div><div class="cl-preview-section"><h2 id="与指定记录比较" style="font-size: 30px;">6.4 与指定记录比较</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有些时候，我们可能需要代码和历史的某一个版本进行比较，这个时候你可以先通过 <code>git log</code> 命令，找到历史提交记录的一个 hash 值，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/06/05.png" data-original="http://startgit.songboy.net/06/05.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="工作区比较">6.4.1 工作区比较</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">将要比较的 hash 值复制下来，然后执行如下所示命令：</p>
+</div><div class="cl-preview-section"><pre><code>git diff hash值
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/06/08.png" data-original="http://startgit.songboy.net/06/08.png" alt="image">在上图中，可以看到工作区和指定记录存在的差异。</p>
+</div><div class="cl-preview-section"><h3 id="暂存区比较">6.4.1 暂存区比较</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有些时候，我们想把暂存区的改动和指定记录进行对比，那么在命令中加入 <code>--cached</code> 即可，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff --cached hash值
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/06/06.png" data-original="http://startgit.songboy.net/06/06.png" alt="image"><br>
+从图中可以看到 diff.php 文件，在指定的版本还未存在，在当前的暂存区中被添加了进来，新增的内容有一行，内容是 <code>lisi</code>。</p>
+</div><div class="cl-preview-section"><h2 id="与最新版本库比较" style="font-size: 30px;">6.5 与最新版本库比较</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">很多时候，我们只需要将未正式提交的代码（包含工作区与暂存区）与最新的 commit 记录进行比较，虽然也可以通过指定 commit 的 hash 值进行，但是却很不方便，需要先获取到 hash 值，这里介绍一个简单的方法，可以通过 <code>git diff HEAD</code> 命令方式快速对比，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff HEAD
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令返回结果如下：<br>
+<img class="" src="http://startgit.songboy.net/06/07.png" data-original="http://startgit.songboy.net/06/07.png" alt="image"><br>
+在执行的命令中，<code>HEAD</code> 指的是当前所在的分支名，如果你想比较其他分支也可以将 HEAD 改成其他分支名。</p>
+</div><div class="cl-preview-section"><h2 id="比较两个历史记录" style="font-size: 30px;">6.6 比较两个历史记录</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候，可能会需要查看某一次提交记录修改了什么内容，这个时候就需要将两个历史记录进行比较；首先通过 <code>git log</code> 命令获取到需要查看的记录 hash 值，然后再找到这个记录的上一个版本的 hash 值，拼接的参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git diff hash值1  hash值2
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，显示的效果如下：<br>
+<img class="" src="http://startgit.songboy.net/06/09.png" data-original="http://startgit.songboy.net/06/09.png" alt="image"></p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">6.7 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这节内容中，主要介绍了工作区和暂存区的概念，以及如何使用 diff 命令进行比较差异，主要知识点有以下：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">工作区，是指目前改动的内容还未使用 <code>git add</code> 临时存储</li>
+<li style="font-size: 20px; line-height: 38px;">暂存区，是指改动的内容已经临时存储，还未正式通过 <code>git commit</code> 提交</li>
+<li style="font-size: 20px; line-height: 38px;">比较修改的命令为 <code>git diff</code>，不同情况增加不同参数</li>
+<li style="font-size: 20px; line-height: 38px;">查看暂存区的额外参数为 <code>--cached</code></li>
+<li style="font-size: 20px; line-height: 38px;">比较历史差异输入一个 hash 值，则是把当前的改动和历史差异对比，两个 hash 值则是把前一个版本和后面一个版本进行对比</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1012">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            05  提交代码：如何把修改后的代码提交到远程仓库
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1014">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            07 忽略文件权限：解决提示文件权限被修改问题
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img1.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

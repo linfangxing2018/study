@@ -1,0 +1,236 @@
+<html><head><meta charset="utf-8"><title>13 reset命令：将仓库记录和恢复指定历史位置-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        13 reset命令：将仓库记录和恢复指定历史位置
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-21 10:01:11
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img1.mukewang.com/5dad115c00017dc706120344.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">加紧学习，抓住中心，宁精勿杂，宁专勿多。 <p class="author">—— 周恩来</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候我们用 <code>git commit</code> 提交代码后发现这一次提交的的内容是错误的，需要将代码复原，这个时候常见有两种做法。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">第一种是把代码错误内容修改正确，然后重新使用 commit 提交一次；第二种方法是使用 <code>git reset</code>  命令撤销上一次错误的 commit 记录。</p>
+</div><div class="cl-preview-section"><h2 id="覆盖代码" style="font-size: 30px;">13.1 覆盖代码</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们先来使用第一种比较原始的方法，会多次一次 commit 记录，我们先使用 ls 命令查看当前仓库的文件，如下图所示<br>
+<img class="" src="http://startgit.songboy.net/13/01.png" data-original="http://startgit.songboy.net/13/01.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到有一个 <code>index.php</code> 文件，我们随意添加一些错误代码到文件当中去，并查看 git 的修改状态，参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>echo 123123  &gt;&gt; index.php  &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，Git 返回的提示信息如下图：<br>
+<img class="" src="http://startgit.songboy.net/13/02.png" data-original="http://startgit.songboy.net/13/02.png" alt="image"><br>
+在图中可以看到 index.php 文件已经被修改，接着我们将修改通过 commit 提交到系统当中去，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git commit . -m '新增代码 v2'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕后，返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/03.png" data-original="http://startgit.songboy.net/13/03.png" alt="image"><br>
+在图中可以看到有一个文件被更改，增加了一行代码，接着我们通过 <code>git log</code> 去查看版本记录，命令执行后返回结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/13/04.png" data-original="http://startgit.songboy.net/13/04.png" alt="image"><br>
+在图中，可以看到刚才的 commit 提交记录已经提交成功；就在这个时候我意识到，我刚才提交的代码有问题，需要撤销刚才的错误代码，于是我使用 <code>vim</code> 重新去修改文件，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>vim index.php 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">使用 vim 编辑 <code>index.php</code> 后，可以看到刚才新增的代码：<br>
+<img class="" src="http://startgit.songboy.net/13/05.png" data-original="http://startgit.songboy.net/13/05.png" alt="image"><br>
+接着我将刚才新增的代码给删除，并重新使用 commit 提交代码，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git commit . -m '新增代码 v2'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/06.png" data-original="http://startgit.songboy.net/13/06.png" alt="image"><br>
+可以看到一个文件被修改，删除了一行代码的提示，至此我们的代码本身已经回滚完成，但是这整个过程是比较繁琐的，并且会多出一些没有意义的 commit 记录。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们可以使用 <code>git log</code> 来查看记录，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/07.png" data-original="http://startgit.songboy.net/13/07.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中我们看到刚才两条 commit 记录，但其实这两天记录是没有意义的，因为单纯让代码恢复到正确版本完全可以使用 reset 操作。</p>
+</div><div class="cl-preview-section"><h2 id="覆盖记录" style="font-size: 30px;">13.2 覆盖记录</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来我们再使用 <code>reset</code> 命令同样来操作一次，看看有什么不同，我们同样去改一下文件，然后查看一下 git 的状态，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>echo 'reset'  &gt;&gt; index.php  &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/09.png" data-original="http://startgit.songboy.net/13/09.png" alt="image"><br>
+在图中可以可以看到文件以及被修改，接着我们使用 <code>git coomit</code> 命令提交代码，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git commit . -m 'git reset测试'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/10.png" data-original="http://startgit.songboy.net/13/10.png" alt="image"><br>
+在图中可以看到一个文件被修改，新增了一行代码，至此我们要构造的环境已经成功。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在我们需要将刚才的提交给撤销掉，可以用到 <code>git reset</code>  操作，但在操作之前，我们先找到刚才的 <code>commitid</code> 也就是哈希值，可以使用 git log 命令查看到，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的版本记录如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/11.png" data-original="http://startgit.songboy.net/13/11.png" alt="image"><br>
+在图中可以看到刚才通过 <code>git commit</code> 命令提交的记录已经在图中显示，我们大致记住确认一下。</p>
+</div><div class="cl-preview-section"><h3 id="head撤销">13.2.1 HEAD^ 撤销</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们学习一个新的命令，这个命令可以撤销我们最近一次提交，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git reset HEAD^
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/12.png" data-original="http://startgit.songboy.net/13/12.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到提示 index.php 已经受到了 <code>git reset</code> 命令的影响，接着我们使用 <code>git status</code> 查看当前仓库状态，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/13.png" data-original="http://startgit.songboy.net/13/13.png" alt="image"><br>
+在图中可以看到 <code>index.php</code> 文件处于被修改且为工作区状态，接着我们通过 <code>git log</code> 来确认之前的提交记录还是否存在，参考命令：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的 commit 记录如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/14.png" data-original="http://startgit.songboy.net/13/14.png" alt="image"><br>
+在图中可以看到提交的记录也被撤销了。</p>
+</div><div class="cl-preview-section"><h3 id="指定回滚位置">13.2.1 指定回滚位置</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">除了上面使用 <code>git reset HEAD^</code> 方式，还可以撤销到指定位置，在操作之前我们需要先通过查看 commit 记录的方式找到 commitid，我们将需要恢复到的版本 commit，将它复制下来，接着使用 <code>git reset</code> 命令将其回滚到此位置，参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git reset 815ac616803fa89c75467618b2be44f85696543d
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完成之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/15.png" data-original="http://startgit.songboy.net/13/15.png" alt="image"><br>
+在图中同样可以看到 <code>index.php</code> 受到了影响，接着我们用 <code>git log</code> 去验证一下，参考命令如下</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令之后，返回的  <code>commit</code>  记录如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/16.png" data-original="http://startgit.songboy.net/13/16.png" alt="image"><br>
+在图中我们看到之前的 <code>commit</code> 记录已经不见了，说明我们使用 <code>git reset</code> 是有效果的，到目前为止虽然 commit 记录已经撤销。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但是代码其实仍然是没有变化的，我们这里可以使用 <code>git checkout 文件名</code> 来撤销文件修改，撤销修改后再通过 <code>git status</code> 去确认当前状态，参考命令如下</p>
+</div><div class="cl-preview-section"><pre><code>git checkout index.php  &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，返回的仓库状态信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/13/17.png" data-original="http://startgit.songboy.net/13/17.png" alt="image"><br>
+在图中我们看到此时仓库中也没有提示有文件被修改过，完美的实现了撤销错误的 commit 提交。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">13.3 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节当中主要讲了将仓库代码回滚的两种方式，着重学习了 <code>git reset</code> 命令，这个命令可以撤销 commit 记录；提到两种 reset 的使用方法：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;"><code>git reset HEAD^</code> 撤销最近一次的 commit 记录</li>
+<li style="font-size: 20px; line-height: 38px;"><code>git reset commit</code> 将 <code>commit</code> 之后的记录全部撤销</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1019">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            12 比较分支差异：展示两个分支的差异部分
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1021">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            14 删除过期分支：清理无意义的分支数据
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

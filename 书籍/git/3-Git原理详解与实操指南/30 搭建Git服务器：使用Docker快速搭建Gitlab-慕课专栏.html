@@ -1,0 +1,225 @@
+<html><head><meta charset="utf-8"><title>30 搭建Git服务器：使用Docker快速搭建Gitlab-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        30 搭建Git服务器：使用Docker快速搭建Gitlab
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-12-06 14:29:12
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img2.mukewang.com/5dd1d3dd0001dea906400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">什么是路？就是从没路的地方践踏出来的，从只有荆棘的地方开辟出来的。 <p class="author">—— 鲁迅</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面的章节中，我们学习了大量的 Git 命令使用，考虑到降低 Git 学习成本并没有教大家如何去搭建 Git 服务器，因为搭建 Git 服务的场景遇到的机会并不多。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但如果团队刚成立，通常需要搭建 Git 服务器，在这一节中我们学习如何使用 Gitlab 去搭建 Git 服务器，为了让大家在搭建的时候减少障碍，这里我们使用 Docker 的方式来搭建，因此首先需要安装 Docker。</p>
+</div><div class="cl-preview-section"><h2 id="安装-docker" style="font-size: 30px;">30.1 安装 Docker</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">安装 Docker 的方式相对简单，直接去 Docker 官网（<a href="http://www.docker.com">www.docker.com</a>）下载安装包即可，Windows10 以下系统稍微麻烦一些不过电脑的配置建议最少 8G 内存，如果对 Docker 不太理解是什么，可以把它当做是一个简化版的虚拟机，大家可以参考一下这个网址的内容进行安装：</p>
+</div><div class="cl-preview-section"><pre><code>https://www.imooc.com/article/49117
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">安装 <code>Docker</code> 完毕之后，我们可以通过执行 <code>docker</code> 命令来验证是否安装成功，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>docker
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，Docker 返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/01.png" data-original="http://startgit.songboy.net/30/01.png" alt="image"><br>
+在上图中可以看到 Docker 返回的帮助信息，说明我们安装 Docker 已经成功。</p>
+</div><div class="cl-preview-section"><h2 id="下载-gitlab-镜像" style="font-size: 30px;">30.2 下载 Gitlab 镜像</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们使用 Docker 去下载 <code>gitlab</code> 的镜像，Docker 下载 Gitlab 镜像的命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>docker pull gitlab/gitlab-ce
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，Docker 返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/02.png" data-original="http://startgit.songboy.net/30/02.png" alt="image"><br>
+在上图中可以看到下载进行已经完成，这个下载的时间会根据你网速来决定，接着我们可以通过查看镜像列表来确认是否下载成功，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">docker images
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，Docker 返回的镜像列表如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/03.png" data-original="http://startgit.songboy.net/30/03.png" alt="image"><br>
+在上图中可以看到 <code>gitlab/gitlab-ce</code> 这个镜像，说明已经下载到本地了。接着我们先装备几个文件夹，这些文件夹将来要映射到 Gitlab 这个服务中，这样数据便会产生在这几个文件夹里面，将来做数据迁移更方便，建立相关存储文件夹，config 配置文件、logs  日志文件、 data 数据文件，执行的命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">mkdir -p ~/config/gitlab/config
+mkdir -p ~/config/gitlab/logs
+mkdir -p ~/config/gitlab/data
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，我们使用 <code>ls</code> 命令确认一下，返回的信息文件夹列表如下所示：<br>
+<img class="" src="http://startgit.songboy.net/30/04.png" data-original="http://startgit.songboy.net/30/04.png" alt="image"><br>
+在上图中可以看到三个文件夹已经创建成功，他们的绝对路径位于：</p>
+</div><div class="cl-preview-section"><pre><code>/Users/song/config/gitlab/config, 
+/Users/song/config/gitlab/logs,
+/Users/song/config/gitlab/data。
+</code></pre>
+</div><div class="cl-preview-section"><h2 id="运行gitlab容器" style="font-size: 30px;">30.3 运行 Gitlab 容器</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着，我们就可以使用 Gitlab 镜像来启动容器实例，Gitlab 提供 http 和 https 服务，我们将容器实例的 <code>443</code> 端口映射到宿主机的 <code>8443</code> 端口，容器实例的 <code>80</code> 端口映射到宿主机的 <code>8089</code> 端口，容器实例的 <code>22</code> 端口映射到宿主机的 <code>2222</code> 端口，接着把我们刚才创建好的配置文件夹、日志文件夹、数据文件夹挂载到容器里面去，最终的启动脚本命令为：</p>
+</div><div class="cl-preview-section"><pre><code>docker run --detach --publish 8443:443 --publish 8090:80 --publish 2222:22 --name gitlab --restart always -v /Users/song/config/gitlab/config:/etc/gitlab -v /Users/song/config/gitlab/logs:/var/log/gitlab -v /Users/song/config/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，Docker 会启动一个容器实例，并返回容器实例的 id，并在后台执行初始化脚本，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/06.png" data-original="http://startgit.songboy.net/30/06.png" alt="image"><br>
+在上图中可以看到一个容器实例的 ID，也可以通过查看容器列表来查看当前有几个容器在运行，查看运行的容器列表命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">docker ps
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，docker 返回的容器列表如下所示</p>
+</div><div class="cl-preview-section"><pre><code>CONTAINER         ID               IMAGE              COMMAND              CREATED   STATUS                 PORTS     
+NAMES
+47f3b91c7e3c  gitlab/gitlab-ce    "/assets/wrapper"   28 seconds ago      Up 26 seconds (health: starting)   0.0.0.0:2222-&gt;22/tcp, 0.0.0.0:8090-&gt;80/tcp, 0.0.0.0:8443-&gt;443/tcp   gitlab
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在可以看到目前只有一个 Gitlab 容器在运行，我们可以通过 <code>docker logs</code> 命令查看容器的标准输出日志，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">docker logs -f gitlab
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，可以看到初始化的过程，当初始化完成之后，能看到如下图所示的信息：<br>
+<img class="" src="http://startgit.songboy.net/30/07.png" data-original="http://startgit.songboy.net/30/07.png" alt="image"><br>
+在上图中，可以看到提示服务已经启动完成，在我的电脑中这个过程大约执行了 2 分钟。</p>
+</div><div class="cl-preview-section"><h2 id="gitlab管理配置" style="font-size: 30px;">30.4 gitlab 管理配置</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">启动完成之后，我们就可以打开 Gitlab 的 web 管理页面进行管理了，在浏览器中输入网址：<code>http://localhost:8090</code> 即可进入 Gitlab 页面，首次进入管理页面时候，会让你设置 root 用户的密码，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/08.png" data-original="http://startgit.songboy.net/30/08.png" alt="image"><br>
+在上图中可以看到一个表单，将你需要设置的密码填写进去，然后提交就设置好了账户密码，下次再次登录时候用户名填写 <code>root</code>，密码填写刚才设置的密码就可以了，登录进入之后看到的页面如下所示，进去之后是英文界面，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/09.png" data-original="http://startgit.songboy.net/30/09.png" alt="image"><br>
+在上图中，可以看到中间有一个 <code>Create a project</code> 的按钮，我们点击这个按钮就会来到创建仓库的页面，URL 地址为：<br>
+<code>http://localhost:8090/projects/new</code>，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/13.png" data-original="http://startgit.songboy.net/30/13.png" alt="image"><br>
+在这个页面当中，我们可以填写我们的仓库名称以及相关信息，然后提交表单后，Gitlab 会帮我新建一个仓库，并会在页面中自动跳转到创建项目的详情页面，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/14.png" data-original="http://startgit.songboy.net/30/14.png" alt="image"><br>
+在上图中我们注意看我红色框选出来的内容，这个地址便是给客户端所使用的地址，我们可以用这个地址克隆和推送代码等，我们将这个地址复制出来 <code>http://47f3b91c7e3c/root/testgitlab.git</code>，把这个地址中的域名部分改成 IP+ 端口形式就可以给其他电脑访问，我把他域名部分改成 <code>localhost:8089</code> 之后的地址为：<code>http://localhost:8090/root/testgitlab.git</code>。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着，我用这个地址克隆一份代码，执行的命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git clone http://localhost:8090/root/testgitlab.git
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，Git 返回的信息如下图所示。<br>
+<img class="" src="http://startgit.songboy.net/30/15.png" data-original="http://startgit.songboy.net/30/15.png" alt="image"><br>
+在上图中可以看到已经成功的克隆出一个仓库，至此已经搭建好自己的 <code>gitlab</code> 环境了。</p>
+</div><div class="cl-preview-section"><h2 id="gitlab日常维护" style="font-size: 30px;">30.5 Gitlab 日常维护</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Gitlab 服务搭建好之后，我们后面可能会涉及到一些维护工作，因为使用 Docker 方式搭建的，所以这里我简单提一下一些常用到的文件配置，我们要进入 Gitlab 这个容器 (你可以理解为虚拟机)，需要执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">docker exec -it gitlab bash
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">进入这个容器之后，我们可以通过 <code>ls</code> 命令查看文件列表，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/10.png" data-original="http://startgit.songboy.net/30/10.png" alt="image"><br>
+在上图中，可以看到这些文件夹和宿主机不一致，说明我们已经进入容器成功。在维护 Gitlab 中我们可能会修改配置文件，这个配置文件路径为 <code>/opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml</code>，我们可以大致查看一下命令：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">tail /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令之后，返回了末尾 10 行配置，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/11.png" data-original="http://startgit.songboy.net/30/11.png" alt="image"><br>
+在上图中，可以看到这个配置文件是存在的，我们如果需要修改它通过 vim 编辑即可，在维护服务过程中可能需要启动或停止服务，不过容器里面的各项服务有很多，比如 <code>redis</code>、<code>Nginx</code>、<code>grafana</code> 等等服务，不过 Gitlab 提供了一个总开关，我们控制总开关即可，命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">gitlab-ctl restart  // 重启
+gitlab-ctl stop      // 停止
+gitlab-ctl start     // 启动
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们以重启服务命令为例，命令执行完毕之后，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/30/12.png" data-original="http://startgit.songboy.net/30/12.png" alt="image"><br>
+在上图中，可以看到有很多个服务会进行重启，另外两个命令类似。</p>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1036">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            29 历史记录清理：保留代码并删除一年前的提交记录
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img2.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

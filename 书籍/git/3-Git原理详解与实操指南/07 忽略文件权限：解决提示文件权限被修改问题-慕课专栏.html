@@ -1,0 +1,206 @@
+<html><head><meta charset="utf-8"><title>07 忽略文件权限：解决提示文件权限被修改问题-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        07 忽略文件权限：解决提示文件权限被修改问题
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-08 10:27:27
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img.mukewang.com/5d909a0e00019bf406400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">老骥伏枥，志在千里； 烈士暮年，壮心不已。 <p class="author">——曹操</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Git 在进行版本管理的时候，默认将文件权限也包含在内，但很多时候，我们可能并不需要让文件权限保持一致。比如当我们代码发布到生产服务器中，然后修改了某个文件的权限，当我再次拉取代码时，如果这个文件正好有代码修改，这个时候 Git 就会提示文件冲突。</p>
+</div><div class="cl-preview-section"><h2 id="权限冲突实验" style="font-size: 30px;">7.1 权限冲突实验</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">为了让大家更好地理解忽略文件权限，下面我做一个简单的实验，来演示文件权限冲突的情况：首先我们模拟两个客户端，通过 cp 命令先复制一个版本库，并进入其中一个目录，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>cp -r test201907   copy  &amp;&amp;  cd test201907
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="修改权限">7.1.1 修改权限</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">进入文件夹之后，先通过 <code>ls -l</code> 命令，查看当前文件夹权限信息，结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/07/01.png" data-original="http://startgit.songboy.net/07/01.png" alt=""></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">然后通过 <code>chmod</code> 命令，修改一个文件的权限，然后使用 <code>git status</code> 命令查看文件修改列表，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>chmod 777 index.php &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后结果如下图所示，在图中可以看到 <code>index.php</code> 文件已经变成了 <code>modified</code> 状态</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/07/02.png" data-original="http://startgit.songboy.net/07/02.png" alt=""></p>
+</div><div class="cl-preview-section"><h3 id="提交代码">7.1.2 提交代码</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着再将 index.php 文件提交到版本控制器，并推送到远程，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git commit . -m '权限测试' &amp;&amp; git push
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/07/03.png" data-original="http://startgit.songboy.net/07/03.png" alt=""></p>
+</div><div class="cl-preview-section"><h3 id="冲突验证">7.1.3 冲突验证</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在我们进入另外一个文件夹，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>cd ../copy
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">进入文件夹之后，先不要拉取代码，然后同样修改 <code>index.php</code> 文件的权限，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>chmod 755 index.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">文件权限被修改之后，我们使用 <code>git diff</code> 命令查看一下文件修改的内容，可以看到原始文件的权限是 644，新的权限已经变成了 755，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/07/04.png" data-original="http://startgit.songboy.net/07/04.png" alt=""></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在确认文件权限修改之后，我们再在这里拉取一下代码，会提示文件冲突，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/07/05.png" data-original="http://startgit.songboy.net/07/05.png" alt=""></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过上面的实验可以看出，git 会记录文件权限，如果两个地方的文件权限不一样，很有可能会导致代码冲突问题。</p>
+</div><div class="cl-preview-section"><h2 id="解决办法" style="font-size: 30px;">7.2 解决办法</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Git 进行代码管理时，如果不想让 Git 记录文件权限，可以通过 git 配置让其忽略文件权限的信息，参考命令如下：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">#当前版本库</p>
+</div><div class="cl-preview-section"><pre><code>#当前版本库
+git config core.filemode false
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果你想让你电脑上所有的版本库，都忽略文件权限，可以在命令中加入 <code>--global</code>，参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git config --global core.fileMode false
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当上面的命令被执行之后，就设置了忽略文件权限，此时通过 <code>cat</code> 查看配置文件<code>.git/config</code>，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>cat .git/config
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在配置文件中，如果看到 <code>fileMode false</code> 则代表配置成功，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/07/06.png" data-original="http://startgit.songboy.net/07/06.png" alt=""></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这时候再次使用 <code>git pull</code> 命令更新代码就不会再提示有冲突，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/07/07.png" data-original="http://startgit.songboy.net/07/07.png" alt=""></p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">7.3 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节当中，主要通过一个小实验演示了文件权限冲突问题，以及如何解决此问题，包含以下几个知识点：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">Git 会记录文件的权限信息；</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">可以通过配置忽略文件权限；</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">忽略文件权限配置，支持按照版本库和全局。</p>
+</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1013">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            06 查看代码修改：使用 diff 查看修改了哪些代码？
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1015">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            08 忽略指定文件或目录：排除项目配置文件
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

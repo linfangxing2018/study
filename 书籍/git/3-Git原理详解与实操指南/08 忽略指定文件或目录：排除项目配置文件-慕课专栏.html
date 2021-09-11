@@ -1,0 +1,181 @@
+<html><head><meta charset="utf-8"><title>08 忽略指定文件或目录：排除项目配置文件-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        08 忽略指定文件或目录：排除项目配置文件
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-09 09:06:22
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img3.mukewang.com/5d909bfd0001d4df06400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">合理安排时间，就等于节约时间。<p class="author">——培根</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在平时工作中可能需要把一些文件放到 Git 工作目录中，但又不想把他们提交到版本控制器里面，比如说，项目的配置文件、IDE 自己产生的目录文件等等。</p>
+</div><div class="cl-preview-section"><h2 id="问题场景" style="font-size: 30px;">8.1 问题场景</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">每次提交代码之前，我都会用 <code>git status</code> 来查看有哪些文件有改动，但有时候，莫名其妙多出一些不是我手动增加的文件，显示为 <code>Untracked files</code> 状态，如下图所示<br>
+<img class="" src="http://startgit.songboy.net/08/01.png" data-original="http://startgit.songboy.net/08/01.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">上图显示的 <code>.DS_Store</code> 和 <code>.idea</code> 是新增加的两个文件，但这两个文件并不是我手动新增加的，而是程序自动产生的，这种文件对项目没有实际上的意义；还有可能导致在团队协作中让两个人的代码冲突，如果直接删除这种文件也没用什么用，因为过不了多久程序又会自动产生，所以最好的办法就是让 <code>git</code> 对他视而不见。</p>
+</div><div class="cl-preview-section"><h2 id="解决方案" style="font-size: 30px;">8.2 解决方案</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这种需求其实非常常见，因此 <code>Git</code> 本身也提供了忽略某些文件的功能，解决起来相对比较简单；我们可以在在 <code>Git</code> 工作区的根目录下创建一个<code>.gitignore</code> 文件，把想忽略的文件名或者目录填进去，Git 就会自动忽略这些文件，如下图所示<br>
+<img class="" src="http://startgit.songboy.net/08/02.png" data-original="http://startgit.songboy.net/08/02.png" alt="image"><br>
+在上图中我把 Mac 系统中经常产生的 .DS_Store 和 IDE 产生的 .idea 放到了文件中去，每个文件占用一行。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">保存修改之后，我们再次在 Git 工作区的根目录使用 <code>git status</code> 命令查看，可以看到之前的提示已经没有了，说明已经生效：<br>
+<img class="" src="http://startgit.songboy.net/08/03.png" data-original="http://startgit.songboy.net/08/03.png" alt="image"></p>
+</div><div class="cl-preview-section"><h2 id="常见问题" style="font-size: 30px;">8.3 常见问题</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在添加 <code>.gitignore</code> 文件后可能会遇到一些相关的问题，我把比较常见的问题在下面列出来，如果你遇到了可以参考解决。</p>
+</div><div class="cl-preview-section"><h3 id="无法添加.gitignore">8.3.1 无法添加<code>.gitignore</code></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在 Windows 系统中因为文件命名的规则是 <code>.</code> 之前必须要有字符，所以如果你直接在资源管理器里新建一个 <code>.gitignore</code> 文件，系统会提示你必须输入文件名；这个时候，你可以通过一些第三方的文本编辑器新建一个文本文件，然后通过 “保存” 或者 “另存为” 就可以把文件保存为 <code>.gitignore</code>，如下图是笔者使用 notpad++ 保存</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/08/04.png" data-original="http://startgit.songboy.net/08/04.png" alt="image"></p>
+</div><div class="cl-preview-section"><h3 id="添加忽略文件">8.3.2 添加忽略文件</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><code>.gitignore</code> 文件支持通配符，当你在文件中添加一些忽略规则之后，可能匹配过于宽松，导致某一个文件无法提交到 <code>git</code> ; 这个时候你有两种方式来处理，</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">或者你发现，可能是 <code>.gitignore</code> 写得有问题，需要找出来到底哪个规则写错了，可以用 <code>git check-ignore</code> 命令检查：</p>
+</div><div class="cl-preview-section"><pre><code>$ git check-ignore -v 文件名
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/08/05.png" data-original="http://startgit.songboy.net/08/05.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Git 会告诉我们，<code>.gitignore</code> 的第 3 行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">除了修改 <code>.gitignore</code> 文件的规则之外还可以使用强制添加的方式，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/08/06.png" data-original="http://startgit.songboy.net/08/06.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果你确实想添加该文件，可以用 <code>-f</code> 强制添加到 Git：</p>
+</div><div class="cl-preview-section"><pre><code>git add -f .DS_Store
+</code></pre>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">8.4 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当需要忽略某些文件时，可以在 git 工作目录中编辑 <code>.gitignore</code> 文件的规则，<code>.gitignore</code> 文件本身要放到版本库里，并且可以对 <code>.gitignore</code> 做版本管理，大部分情况下以下类型会把它忽略：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">忽略操作系统自动生成的文件，比如缩略图等；</li>
+<li style="font-size: 20px; line-height: 38px;">忽略编译生成的中间文件、可执行文件以及一些编辑器自动生成的文件；</li>
+<li style="font-size: 20px; line-height: 38px;">忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件；</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1014">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            07 忽略文件权限：解决提示文件权限被修改问题
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1016">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            09 图形工具使用：各系统通过图形管理git代码仓库
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

@@ -1,0 +1,208 @@
+<html><head><meta charset="utf-8"><title>05  提交代码：如何把修改后的代码提交到远程仓库-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        05  提交代码：如何把修改后的代码提交到远程仓库
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-09-30 10:52:55
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img4.mukewang.com/5d88883600012d7206400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">古之立大事者，不唯有超世之才，亦必有坚韧不拔之志。<p class="author">——苏轼</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上一节中，我们学习了如何从远处拉取了一个仓库到本地，在这节中将学习如何将代码提交到版本库记录中，并将提交记录推送到远程仓库中。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">将代码提交到远程仓库中，其实通常只需要两条命令即可，首先是提交到本地，然后再讲本地的记录推送到远端。但在实际工作中，为了防止本地仓库和远程仓库出现冲突，一般先让把远程代码同步到本地代码，让本地代码保持最新，然后再提交改动到本地，最后进行推送。</p>
+</div><div class="cl-preview-section"><h2 id="同步远程代码" style="font-size: 30px;">5.1 同步远程代码</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一个远程仓库有可能有多人有权限推送，所以存在远程代码比你本地仓库更新，因此在提交代码之前需要先拉取服务器代码，让本地仓库保持最新的版本记录；这样做的目的是为了防止当你提交代码之后，推送到远端出现代码冲突问题，拉取远程代码参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git pull 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在终端执行完命令之后，如果有代码更新，返回的信息如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/05/01.png" data-original="http://startgit.songboy.net/05/01.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到文件 <code>README.md</code> 文件增加了一行代码。</p>
+</div><div class="cl-preview-section"><h2 id="检查改动文件" style="font-size: 30px;">5.2 检查改动文件</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当远端最新的代码拉下来之后，我们最好（非必须，建议每次提交前检查）通过 <code>git status</code> 命令检查一下有哪些文件被改动了，参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git status 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/05/02.png" data-original="http://startgit.songboy.net/05/02.png" alt="image"><br>
+在终端执行完命令之后，可以看到我当前有三个文件有改动，有删除的、有添加的、也有修改内容的，图中返回的状态为英文，这里给大家翻译一下，状态有下面这几种：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;"><strong>Untracked</strong>: 未跟踪，一般为新增文件，此文件在文件夹中，但并没有加入到 git 库，不参与版本控制。通过 git add 状态变为 Staged.</li>
+<li style="font-size: 20px; line-height: 38px;"><strong>Modified</strong>: 文件已修改，仅仅是修改，并没有进行其他的操作.</li>
+<li style="font-size: 20px; line-height: 38px;"><strong>deleted</strong>： 文件已删除，本地删除，服务器上还没有删除.</li>
+<li style="font-size: 20px; line-height: 38px;"><strong>renamed</strong>：文件名称被改变</li>
+</ol>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果发现无意中编辑了某一个文件，但实际上并不想改变它，这里可以使用 <code>git checkout 文件名</code>来撤销更改，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout README.md
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">撤销后，再次使用 <code>git status</code> 进行查看变动，如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/05/02_b1.png?1" data-original="http://startgit.songboy.net/05/02_b1.png?1" alt="image"><br>
+在图中可以看到文件 <code>README.md</code> 已经不在变动文件列表中，说明我们已经将此文件的修改回滚成功。</p>
+</div><div class="cl-preview-section"><h2 id="添加文件到缓存" style="font-size: 30px;">5.3 添加文件到缓存</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过检查并将不需要改动的代码恢复后，就可以开始将需要提交的文件添加到暂存区中，添加文件到暂存区可以指定添加文件或目录，或者一次性添加全部改动到缓存。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在先来看看提交指定文件或目录至缓存的格式，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git add index.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">上面这条命令将会把 <code>index.php</code> 这个文件提交到暂存区中去，提交后使用 <code>git status</code> 可以看到它的变化，原本 index.php 红颜色的名字变成了绿色，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/05/03.png" data-original="http://startgit.songboy.net/05/03.png" alt="image"><br>
+你也可以使用刚才的命令将 <code>app</code> 目录，提交到缓存中去，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git add app
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">再次使用 <code>git status</code> 命令进行查看，结果如下图所示</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/05/04.png" data-original="http://startgit.songboy.net/05/04.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">会发现 app 下的 test.php 文件被添加到缓存区域中了，如果你想一次性添加所有文件，那么可以把命令这样写 <code>git add .</code>, 执行后结果如下所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/05/05.png" data-original="http://startgit.songboy.net/05/05.png" alt="image"></p>
+</div><div class="cl-preview-section"><h2 id="提交代码" style="font-size: 30px;">5.4 提交代码</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当你将所需要提交的代码都添加到缓存区域后，接下来就可以将代码提交到本地仓库中，参考命令如下所示 ：</p>
+</div><div class="cl-preview-section"><pre><code>git commit . -m “这是备注信息”
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">上方命令中的<code>.</code> 是代表选择所有的文件或目录，你也可以提交指定某一个文件，将<code>.</code> 换成相应的目录或文件名即可，当命令执行完毕之后，参考结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/05/05_b1.png?1" data-original="http://startgit.songboy.net/05/05_b1.png?1" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">此时你再次使用 <code>git status</code> 进行查看，会发现没有文件改动列表；因为你已经将改动的文件都提交到版本记录中了；而 <code>git status</code> 是基于为提交的代码最后一个版本比较的，当你提交后，两个区域的文件内容以之，所以就显示没有改动，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/05/05_b2.png?1" data-original="http://startgit.songboy.net/05/05_b2.png?1" alt="image"></p>
+</div><div class="cl-preview-section"><h2 id="推送代码" style="font-size: 30px;">5.5 推送代码</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当代码提交之后，在本地的工作就已经完成了，此时为了让其他人拉去你的代码，通常还需要将代码推送到远程地址去，这里我告诉大家最简单的方式，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git push
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，效果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/05/06.png" data-original="http://startgit.songboy.net/05/06.png" alt="image"></p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">5.6 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在本节中主要讲解了怎么将改动的代码提交到版本控制器中，以及提交之后如何推送到远端服务器，知识点有以下：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">要将代码推送到服务器通常会经历五个步骤：更新、检查，提交 暂存，正式提交，推送</li>
+<li style="font-size: 20px; line-height: 38px;"> git 提交代码可以选择全部提交或者部分提交，全部提交可以用<code>.</code> 替代，部分提交则输入目录名或文件名</li>
+<li style="font-size: 20px; line-height: 38px;">提交代码之后还需要使用 <code>git push</code> 命令把代码推送到远程服务器</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1011">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            04 拉取远端代码：使用Git命令下载远程仓库到本地
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1013">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            06 查看代码修改：使用 diff 查看修改了哪些代码？
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

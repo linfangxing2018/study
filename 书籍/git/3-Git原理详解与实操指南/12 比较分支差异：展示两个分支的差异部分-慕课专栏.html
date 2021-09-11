@@ -1,0 +1,214 @@
+<html><head><meta charset="utf-8"><title>12 比较分支差异：展示两个分支的差异部分-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        12 比较分支差异：展示两个分支的差异部分
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-18 11:06:57
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img.mukewang.com/5da849cd0001e30406400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">每个人的生命都是一只小船，理想是小船的风帆。<p class="author">——张海迪</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面讲到了分支的常用操作，有时候需要比较两个分支有什么不同；比如说我在 dev 开发分支上开发代码，由于开发的时间比较长，可能你已经忘记在 Dev 分支上提交了代码，有哪些代码在 master 分支还没有的；</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这个时候按照我们前面所掌握的，你可以先切回到 master 分支，然后通过 git log 查看最后的提交记录，然后在切回到 dev 分支进行人工对比，这种方法明显操作起来繁琐，所以在这一节当中教大家怎么比较两个分支的差异。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">主要有两个部分：1. 比较分支的提交记录 2. 比较分支的代码差异。</p>
+</div><div class="cl-preview-section"><h2 id="环境准备" style="font-size: 30px;">12.1 环境准备</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在学习之前我先准备一个实验环境，这个环境会让两个分支产生差异，便于后面我们的演示，首先我需要基于 master 分支上新建一个 dev 分支，参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout -b dev
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">新建分支之后，我需要让两个分支的代码不同，以及提交记录不同，所以我先修改文件，然后再将修改的文件提交到版本控制器中，参考命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>echo 123123 &gt; index.php &amp;&amp; git add . &amp;&amp; git commit . -m '修改问价提交'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回结果如下所示：<br>
+<img class="" src="http://startgit.songboy.net/12/01.png" data-original="http://startgit.songboy.net/12/01.png" alt="image"><br>
+从图中可以看到有一个文件被修改，增加了一行，减少了一行，因为此时还没有合并到 master 分支，所以现在 master 分支和 dev 分支已经产生了不一样的地方，接下来我们将尝试通过命令查看具体差异。</p>
+</div><div class="cl-preview-section"><h2 id="查看代码差异" style="font-size: 30px;">12.2 查看代码差异</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">查看差异分为两种，具体的代码文件差异，和提交记录的差异；这里我们先来查看代码的具体差异，分别有三种方式：1. 查看哪些文件被修改了 2. 查看某个文件的代码差异 3. 查看全部的代码差异。</p>
+</div><div class="cl-preview-section"><h3 id="查看文件差异">12.2.1 查看文件差异</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候，我们想知道当前的分支与另外一个分支，有哪几个文件不一样，这个时候可以使用如下参考命令：</p>
+</div><div class="cl-preview-section"><pre><code>git diff master dev  --stat
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/12/02.png" data-original="http://startgit.songboy.net/12/02.png" alt="image"><br>
+在图中可以看到，我们刚才修改的 index.php 文件显示了出来，并且告诉我们这个文件与 master 分支相比增加了一行代码，同时也删除了一行代码。</p>
+</div><div class="cl-preview-section"><h3 id="显示文件具体修改">12.2.2 显示文件具体修改</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过前面的文件修改差异，我们已经知道了有哪些文件被修改了，现在我想知道某一个文件具体被修改了什么内容，此时可以参考如下命令：</p>
+</div><div class="cl-preview-section"><pre><code>git diff master dev index.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在命令中使用了 master 分支最新的代码与 dev 分支最新的代码进行对比，同时传递了一个文件名，因此这里只会展示此文件的具体修改内容，返回结果如下所示：<br>
+<img class="" src="http://startgit.songboy.net/12/03.png?1" data-original="http://startgit.songboy.net/12/03.png?1" alt="image"><br>
+在图中可以看到删除了一行空内容，又增加了一行内容为 123123。</p>
+</div><div class="cl-preview-section"><h3 id="显示全部文件的修改">12.2.3 显示全部文件的修改</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">刚才，我们通过指定了某一个文件查看具体的代码修改，其实这里还有一种用法，就是不填文件名，那么就是查看所有的修改，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff master dev
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这里需要注意，如果你修改的文件比较多，一次查看所有的修改可能会眼花缭乱，适合修改内容不多的情况下使用，返回结果结构和前面的基本一致。<br>
+<img class="" src="http://startgit.songboy.net/12/04.png?1" data-original="http://startgit.songboy.net/12/04.png?1" alt="image"><br>
+在图中可以看到同样显示了具体的修改内容，因为我只修改了一个文件，所以只展示了一个文件，如果修改了多个文件的话，这里都会显示出来。</p>
+</div><div class="cl-preview-section"><h2 id="查看提交记录差异" style="font-size: 30px;">12.3 查看提交记录差异</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">除了可以看代码的差异外，有时候还需要查看提交记录的不同，比如说我想查看开发分支比生产分支多了多少提交记录；通常查看提交记录的不同有下面几种方法：1. 查看 A 分支有但 B 分支没有的记录  2. 单纯的比较两个分支的差异 3. 显示个记录在某些分支上存在。</p>
+</div><div class="cl-preview-section"><h3 id="查看新纪录">12.3.1  查看新纪录</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面环境准备中，我基于生产分支上新建了一个 dev 分支，然后提交了代码；但某些原因，我忘记了我提交了几次修改，此时我就可以通过查看 dev 分支中有的记录而在生产分支中没有的记录，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log dev ^master
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/12/05.png" data-original="http://startgit.songboy.net/12/05.png" alt="image"><br>
+在图中看到只有一条记录，说明我刚才在 dev 分支下只提交了一次代码。</p>
+</div><div class="cl-preview-section"><h3 id="单纯比较差异">12.3.2 单纯比较差异</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在遇到了一个新的情况，我不管两个分支谁提交的记录多，谁提交的少；而是只想知道两个分支记录有什么不一样，参考命令如下图所示。</p>
+</div><div class="cl-preview-section"><pre><code>git log branch1...branch2
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，返回结果如下图所示，实验需要多个差异才能明显看出效果，这里为了便于演示，下面的截图是我从一个真实的代码库中进行的对比：<br>
+<img class="" src="http://startgit.songboy.net/12/07.png?1" data-original="http://startgit.songboy.net/12/07.png?1" alt="image"><br>
+在图中显示了在 develop 分支中新提交的记录，在图中注意看到绿色字体的 <code>develop</code>，这是说明这条记录目前存在于 develop 分支上，没有显示 <code>master</code> 分支则说明这条记录不存在与 master 分支，按下空格往下记录看，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/12/07_1.png" data-original="http://startgit.songboy.net/12/07_1.png" alt="image"><br>
+在图中可以看到同样会显示 test 分支中有的记录，而在 develop 分支中没有，说明这个代码会展示两个分支的不同。</p>
+</div><div class="cl-preview-section"><h3 id="查看各记录存在于那些分支上">12.3.3 查看各记录存在于那些分支上</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">刚才上面的查看方式其实有一个缺陷，就是没有在每一个记录中显示所属分支，这样如果差异记录太多的时候就会造成不方便，所以我们还可以在命令中加入 <code>--left-right</code> 参数，这样在展示每条差异记录的时候，都能看出这条记录所属分支，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log --left-right develop...test
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/12/08.png?1" data-original="http://startgit.songboy.net/12/08.png?1" alt="image"><br>
+在图中，注意看我黄色框选的箭头符号，因为我们在命令中加入了 <code>-–left-right</code> 所以左箭头 <code>&lt;</code> 表示是 develop 的，右箭头 &gt; 表示是 test 分支的。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">12.4 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这节当中主要学习了如何比较两个分支之间的差异，包括代码差异以及提交记录的差异，练习方式如下：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">基于当前的分支新建一个分支，并修改代码提交</li>
+<li style="font-size: 20px; line-height: 38px;">使用 <code>git diff 分支1 分支2</code> 的方式进行代码差异比较</li>
+<li style="font-size: 20px; line-height: 38px;">使用 <code>git log 分支1..分支2</code> 的方式进行提交记录的差异比较</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1018">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            11 文件忽略进阶：忽略已加入版本控制器的文件
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1020">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            13 reset命令：将仓库记录和恢复指定历史位置
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img3.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

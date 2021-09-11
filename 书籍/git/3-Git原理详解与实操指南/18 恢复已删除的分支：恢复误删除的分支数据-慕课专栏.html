@@ -1,0 +1,225 @@
+<html><head><meta charset="utf-8"><title>18 恢复已删除的分支：恢复误删除的分支数据-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        18 恢复已删除的分支：恢复误删除的分支数据
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-11-06 12:09:52
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img4.mukewang.com/5daee0af00012d6206400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">成功＝艰苦的劳动＋正确的方法＋少谈空话。<p class="author">——爱因斯坦</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在使用 Git 的过程中，有时可能会有一些错误操作，造成分支被删除或者丢失，比如 <code>branch -d test</code>，如果我们想恢复此分支，可以通过 reflog 来进行恢复，不过前提是，这个 test 分支的信息没有被 <code>git gc</code> 清除。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">一般情况下，除非手动执行了 <code>git gc</code> 命令，否则 gc 对那些无用的 object 会保留很长时间后才清除的，reflog 是 Git 提供的一个内部工具，用于记录对 Git 仓库进行的各种操作，可以使用 <code>git reflog show</code>  所有的管理类操作日志。</p>
+</div><div class="cl-preview-section"><h2 id="场景复现" style="font-size: 30px;">18.1 场景复现</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们现在模拟一下现场，首先我会新建一个分支，然后修改一些内容，然后提交到版本控制器中，最后再将此分支删除，模拟出分支被删除的情况。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">首先，我们查看当前版本库控制器中有哪些分支，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git branch
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/01.png" data-original="http://startgit.songboy.net/18/01.png" alt="image"><br>
+在图中可以看到当前分支处于 master 中，并且本地只存在一个 master 分支。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们新建一个新的分支，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout -b retest
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，提示信息如下：<br>
+<img class="" src="http://startgit.songboy.net/18/02.png" data-original="http://startgit.songboy.net/18/02.png" alt="image"><br>
+在终端的截图中可以看出新建分支已经成功，并且已经自动切换到了 <code>retest</code> 分支上</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们随意修改一下代码，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>echo '测试恢复' &gt; 测试恢复.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行修改代码的命令后，我们再检查一下当前的修改状态，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令后，返回的提示信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/03.png" data-original="http://startgit.songboy.net/18/03.png" alt="image"><br>
+在上图中可以看到新增了一个文件，我们将此文件提交到版本控制器中，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git add .  &amp;&amp; git commit . -m '添加测试文件'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完后返回如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/04_1.png" data-original="http://startgit.songboy.net/18/04_1.png" alt="image"><br>
+在图中可以看到一个文件被修改，新增了一行代码。接着我们开始将此分支删除，首先我们切换到另外一个分支上去，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout master
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/04.png" data-original="http://startgit.songboy.net/18/04.png" alt="image"><br>
+在图中可以看到已经成功切换到了 master 分支，接着我再把 <code>retest</code> 分支删除，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git branch -D retest
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/05.png" data-original="http://startgit.songboy.net/18/05.png" alt="image"><br>
+在图中可以看到 Git 已经提示删除分支成功，接下来我们查看分支列表，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git branch
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/06.png" data-original="http://startgit.songboy.net/18/06.png" alt="image"><br>
+在图中可以看出当前只剩下 <code>master</code> 分支，之前的 <code>retest</code> 已经不见了；至此我们实验环境已经完成，接下来将开始进行恢复分支的实践。</p>
+</div><div class="cl-preview-section"><h2 id="恢复实践" style="font-size: 30px;">18.2 恢复实践</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">恢复的过程，相比实验环境搭建来说很简单，我们只需要两步操作即可，首先通过日志找到 <code>commitid</code>，然后通过新建分支的方式，加入 <code>commitid</code> 即可。</p>
+</div><div class="cl-preview-section"><h3 id="找出commitid">18.2.1 找出 commitId</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在之前的章节当中，我们学习了 <code>git log</code> 命令，这条命令可以显示所有提交过的版本信息，但我们对分支的一些管理操作并不会显示出来；这些管理的操作日志并不是没有记录，而是需要使用 <code>git reflog</code> 命令才能显示，显示分支管理命令参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git reflog show
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/07.png" data-original="http://startgit.songboy.net/18/07.png" alt="image"><br>
+在图中注意看红色框选区域，下面一条是我切换到 <code>retest</code> 分支时候记录下来的，另外一条是执行了提交操作，我们把 <code>commitid</code> 值 <code>b52b955</code> 复制下来。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着使用 <code>git branch 分支名称 commit_id</code> 方式建立一个新的分支，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout -b  retest_v3  b52b955
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/08.png" data-original="http://startgit.songboy.net/18/08.png" alt="image"><br>
+在图中可以看出一个成功新建了一个 <code>retest_v3</code> 分支，并自动切换当前所在的分支为 <code>retest_v3</code>，接下来我们查看 <code>commitid</code>  是否也包含在里面，查看提交记录参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行之后，返回的提交版本记录如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/18/09.png" data-original="http://startgit.songboy.net/18/09.png" alt="image"><br>
+在图中可以看到，我们之前搭建实验环境时候提交的记录显示出来了，至此我们已经成功把丢失的分支，通过重建分支的方式恢复到了 <code>retest_v3</code> 上了。</p>
+</div><div class="cl-preview-section"><h2 id="常见问题" style="font-size: 30px;">18.3 常见问题</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在实验 Git 中，还有很多种方式造成可能丢失记录或分支的情况，恢复起来其实都大同小异，这里针对几个常见的问题进行说明一下。</p>
+</div><div class="cl-preview-section"><h4 id="回滚-reset-操作" style="font-size: 26px;">18.3.1 回滚 reset 操作</h4>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果你不小心使用 <code>git reset</code> 回滚了提交记录，想找回之前的提交记录也是可以的；可以 <code>git reflog</code> 查看操作历史，找到执行 <code>git reset</code> 命令之前 <code>commitid</code>，然后 <code>git reset --hard</code> 到那个 <code>commitid</code> 即可。</p>
+</div><div class="cl-preview-section"><h4 id="从历史版本中找回删除的文件" style="font-size: 26px;">18.3.2 从历史版本中找回删除的文件</h4>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候，我们在某个版本中删除了文件，后来又突然发现需要这个文件，也是可以恢复的；恢复之前首先确定要恢复的文件在哪一个版本（commit）中，假设那个版本号是： 7a4312sd，文件路径为 abc.php 那么参考命如下：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout 7a4312sd abc.php
+</code></pre>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">18.4 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">Git 是一个比较成熟的版本控制器系统，通常误操作导致的代码丢失，只要还没有触发 <code>git gc</code> 操作，那么基本都是可以恢复的，恢复的方式主要是通过 <code>git reflog</code> 找出对应的 commitid，然后按照去恢复：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">使用 <code>git reflog</code> 可以查看 Git 的操作的日志，<code>git log</code> 只能查看版本日志；</li>
+<li style="font-size: 20px; line-height: 38px;">找回分支命令参考  <code>git branch 分支名称 commitid</code>。</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1024">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            17 远端覆盖本地：把远端代码覆盖本地
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1026">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            19 比较历史版本差异：比较两个分支下指定版本的区别
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img1.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

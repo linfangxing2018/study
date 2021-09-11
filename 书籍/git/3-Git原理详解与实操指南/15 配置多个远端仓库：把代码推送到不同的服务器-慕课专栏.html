@@ -1,0 +1,204 @@
+<html><head><meta charset="utf-8"><title>15 配置多个远端仓库：把代码推送到不同的服务器-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        15 配置多个远端仓库：把代码推送到不同的服务器
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-25 10:23:52
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img.mukewang.com/5daee064000149d706400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">人生太短，要干的事太多，我要争分夺秒。<p class="author">——爱迪生</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候，我们需要将一个改动推送到多个远程仓库去，比如说你做了一个开源项目，既想发布到 GitHub 又想发布到国内的码云上，如果建立两个文件夹分别去推送，就非常麻烦，其实 Git 已经有相关的功能，在这一节中我们来学习如何使用。</p>
+</div><div class="cl-preview-section"><h2 id="环境准备" style="font-size: 30px;">15.1 环境准备</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">首先我去 GitHub 上创建一个远程仓库，创建地址为 <code>https://github.com/new</code> ，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/01.png" data-original="http://startgit.songboy.net/15/01.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在表单下方有一个提交表单按钮，点击后会自动跳转到仓库页面，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/02.png" data-original="http://startgit.songboy.net/15/02.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上图中可以看到有一个仓库地址，我们把仓库地址复制一下，然后打开终端窗口，然后在终端窗口中查看当前的地址，参考命令如下图所示：</p>
+</div><div class="cl-preview-section"><pre><code>git remote -v
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，返回信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/15/03.png" data-original="http://startgit.songboy.net/15/03.png" alt="image"><br>
+在上图中可以看到远程仓库地址信息，我们在这些信息中可以看到两个 origin，这两个 origin 是代表远程仓库的一个名字，默认情况下就是 origin；</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在地址后面有一个括号里面有 <code>push</code> 和 <code>fetch</code> 两种，当我们执行 <code>git push</code> 时候他会调用对应 <code>push</code> 地址，同样当我们执行命令 <code>git featch</code> 的时候则会调用 <code>fetch</code> 地址；当拉去代码之后默认情况下会产生一个远程仓库 origin，并且对应的 push 地址也只有一个；</p>
+</div><div class="cl-preview-section"><h2 id="添加多个仓库" style="font-size: 30px;">15.2 添加多个仓库</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面的内容中，我们学习了使用命令 <code>git push</code> 把代码推送到远程仓库中去，其实这条命令是一条简写的命令，因为我们没有指定仓库地址完整的命令是 <code>git push origin</code>，在执行简写命令时 Git 会找一个默认的仓库；如果我们想把代码往多个代码托管平台推送只需要添加一个远程地址即可，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git remote add github https://github.com/78778443/gittest.git
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令参数 <code>git remote add</code> 是添加远程仓库地址固定写法，<code>github</code> 是我给远程仓库自定义的一个名字，<code>https://github.com/78778443/gittest.git</code> 则是的远程仓库地址，命令执行完成之后，我们再使用 <code>git remote -v</code> 查看远程地址列表，返回信息如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/04.png" data-original="http://startgit.songboy.net/15/04.png" alt="image"><br>
+在图中可以看到已经新增了一个 <code>github</code> 的仓库地址，接下来，我们使用完整的推送命令把代码推送到 GitHub 的代码仓库当中去，参考推送命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git push github
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，返回的信息如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/05.png" data-original="http://startgit.songboy.net/15/05.png" alt="image"><br>
+在图中可以看到，GitHub 需要让我进行认证，输入用户名和密码之后，成功把本地代码推送到了远程仓库中；我们回到 GitHub 网页中，可以看到已经上传上来，如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/06.png" data-original="http://startgit.songboy.net/15/06.png" alt="image"><br>
+在上图中可以看到 GitHub 页面当中已经可以看到我们刚才推送上来的代码。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来我们再尝试用简写的推送命令推送代码，看看会把修改推送到什么哪一个仓库中去，执行的命令和返回结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/07.png" data-original="http://startgit.songboy.net/15/07.png" alt="image"><br>
+在图中可以看到，当我使用简写的推送命令进行推送时候，并不会往 GitHub 这个仓库进行推送，只会往默认的 origin 仓库中推送。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这里说一个小技巧，如果我们想将通过简写的命令让他推送到 GitHub 而不是 origin，可以在推送的命令中加上  <code>-u</code> 参数来进行修改默指定的仓库，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git push -u github 
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这句命令执行之后，会首先将代码推送到 GitHub 仓库中，并且以后使用 <code>git push</code> 推送时也会往 GitHub 中推送，执行结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/08.png" data-original="http://startgit.songboy.net/15/08.png" alt="image"><br>
+在返回的信息中可以看到已经把当前的内容推送到 Git 仓库中，并且成功修改了推送默认的仓库。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来我们来验证一下刚才的操作正确性，我们随意修改一个文件里面的内容，然后提交到本地仓库，最后使用简写的推送命令 <code>git push</code> 进行推送，执行的命令和返回结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/09.png" data-original="http://startgit.songboy.net/15/09.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在图中可以看到当执行了 <code>git push</code> 之后，已经变成了 GitHub 的地址，说明修改默认的推送地址成功。</p>
+</div><div class="cl-preview-section"><h3 id="一个仓库多个地址">15.3 一个仓库多个地址</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候你可能还有这种需求，就是想推送的时候执行一条命令，就把代码往两个地址同时推送，这种操作 Git 也是支持的；和上一小节往 Git 中配置两个远程仓库的方式略有不同，我们可以在一个远程仓库中配置多个 push 地址，下面我们来实践一下。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">首先我们把上面一小节中添加的 GitHub 地址给删除，让仓库恢复成之前的效果，删除 GitHub 远程仓库执行的命令和删除验证的结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/15/11.png" data-original="http://startgit.songboy.net/15/11.png" alt="image"><br>
+在上图中可以看到已经删除成功， 使用 <code>git remote -v</code> 展示的只保留了 origin 的地址。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们往 origin 仓库中添加多个地址，参考的命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git remote set-url --add origin https://github.com/78778443/gittest.git
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，我们再次使用 <code>git remote -v</code> 来查看远程仓库地址信息，返回结果如下图所示：</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/15/12.png" data-original="http://startgit.songboy.net/15/12.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在返回的信息中，可以看到在 origin 远程仓库中增加了一个 GitHub 的 push 地址，这个时候我们再去修改内容，然后推送查看效果，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/15/13.png" data-original="http://startgit.songboy.net/15/13.png" alt="image"><br>
+在上图中可以看到，只需要执行 <code>git push</code> 命令，Git 就会一次性把本地仓库的代码推送到多个远程地址去。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">15.4 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节中我们主要学习了 Git 远程仓库的管理，解决如何把一份代码快速推送到多个仓库中，主要有以下两种方式：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">新增多个远程仓库，不同的仓库配置不同的仓库地址</li>
+<li style="font-size: 20px; line-height: 38px;">新增多个远程仓库地址，把多个远程仓库地址放到一个仓库中</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1021">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            14 删除过期分支：清理无意义的分支数据
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1023">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            16 本地覆盖远端：把本地仓库覆盖到远程仓库
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img2.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

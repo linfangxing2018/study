@@ -1,0 +1,255 @@
+<html><head><meta charset="utf-8"><title>03 初识Git : 本地创建一个 Git 仓库-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        03 初识Git : 本地创建一个 Git 仓库
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-09-25 17:51:32
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img.mukewang.com/5d8886900001dbd606400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">宝剑锋从磨砺出，梅花香自苦寒来。<p class="author">——佚名</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上一节内容中，我们已经将 Git 环境安装好，从这一节开始我们开始正式接触 Git 的操作命令，从最简单的开始，循序渐进。在这一节中，我们通过本地创建一个 Git 版本库来初步认识 Git 版本库，以及 Git 的一些必要的配置。</p>
+</div><div class="cl-preview-section"><h2 id="创建版本库" style="font-size: 30px;">3.1 创建版本库</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们首先创建文件夹 <code>test</code>，这个文件夹用于版本的根目录。我们如果在 Windows 下可以单击鼠标右键，在菜单中选择新建文件夹，然后把文件夹名字改为 <code>test</code> 就可以了。如果在 Linux 或者 Mac 系统下，可以通过命令 <code>mkdir</code> 创建文件夹，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>mkdir test &amp;&amp; cd test
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来不管什么系统，都打开终端，并在终端中通过 <code>cd</code> 命令的方式进入文件夹，然后就可以使用 <code>git init</code> 命令初始化一个仓库了，参考执行命令如下：</p>
+</div><div class="cl-preview-section"><pre class="  language-sh"><code class="prism  language-sh">git init
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令之后，Git 会进行一系列的初始化操作，当你看到类似 <code>Initialized empty Git repository in /Users/song/test/.git/</code> 提示，说明已经创建一个版本库成功，同时你会发现光标左侧比之前多出几个字符 <code>git:(master)</code>，这是因为我们在第二节的时候安装了 <code>oh-my-zsh</code> 主题所导致。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当 <code>oh-my-zsh</code> 发现当前目录下存在<code>.git</code> 文件夹，便会读取当前版本库的信息，并把当前版本库所在的分支名显示在光标左侧；而当你通过 cd 命令跳出版本库的目录时候，光标左侧的 <code>git:(master)</code> 提示也会随着消失，如下图所示  <img class="" src="http://startgit.songboy.net/03/1.png?" data-original="http://startgit.songboy.net/03/1.png?" alt=""></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">刚才说到初始化版本库会在当前目录中一个<code>.git</code> 的文件夹，我们可以重新进入版本库根目录，然后通过命令 <code>ls -al</code> 进行查看，如下命令所示：</p>
+</div><div class="cl-preview-section"><pre class="  language-sh"><code class="prism  language-sh">➜  test git:(master) ls -al
+total 0
+drwxr-xr-x   3 song  staff   96  6 25 22:11 .
+drwxr-xr-x   8 song  staff  256  6 25 22:11 ..
+drwxr-xr-x  10 song  staff  320  6 25 22:49 .git
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="认识.git">3.1.2 认识<code>.git</code></h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在生成的 .git 目录中，里面包含了整个版本库的信息，我们可以通过命令 <code>cd .git &amp;&amp; ls -al</code> 进入 .git 文件夹中查看具体有哪些文件：</p>
+</div><div class="cl-preview-section"><pre><code>➜  .git git:(master) ls -al
+total 24
+drwxr-xr-x  10 song  staff  320  6 25 22:11 .
+drwxr-xr-x   3 song  staff   96  6 25 22:11 ..
+-rw-r--r--   1 song  staff   23  6 25 22:11 HEAD
+drwxr-xr-x   2 song  staff   64  6 25 22:11 branches
+-rw-r--r--   1 song  staff  137  6 25 22:11 config
+-rw-r--r--   1 song  staff   73  6 25 22:11 description
+drwxr-xr-x  13 song  staff  416  6 25 22:11 hooks
+drwxr-xr-x   3 song  staff   96  6 25 22:11 info
+drwxr-xr-x   4 song  staff  128  6 25 22:11 objects
+drwxr-xr-x   4 song  staff  128  6 25 22:11 refs
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这些目录可能我们会比较陌生，在后面的章节当中我们会略有涉及，因此，在这节当中先简单了解一下：</p>
+</div><div class="cl-preview-section"><ul>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>HEAD</code> 文件指示目前被检出的分支</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>branches</code> 新版本已经废弃无须理会</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>description</code> 用来显示对仓库的描述信息</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>config</code> 文件包含项目特有的配置选项</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>info</code> 目录包含一个全局性排除文件</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>hooks</code> 目录包含客户端或服务端的钩子脚本</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>index</code> 文件保存暂存区信息</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>objects</code> 目录存储所有数据内容</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;"><code>refs</code> 目录存储分支的提交对象的指针</p>
+</li>
+</ul>
+</div><div class="cl-preview-section"><h2 id="基础配置" style="font-size: 30px;">3.2 基础配置</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在建立完项目的版本库之后，后续对代码的管理操作都会要求有一个身份，所以需要你在管理操作之前，配置一个昵称和邮箱，这个昵称和邮箱仅仅是在查看改动记录时候用的，和后面的鉴权没有关系。</p>
+</div><div class="cl-preview-section"><h3 id="查看配置信息">3.2.1 查看配置信息</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在设置昵称和邮箱之前，可以先检查一下有没有配置昵称和邮箱，查看昵称的命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git config user.name
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">查看邮箱的命令如下所示:</p>
+</div><div class="cl-preview-section"><pre><code>git config user.email
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="设置配置信息">3.2.2 设置配置信息</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果执行上面的命令没有返回相应的昵称和邮箱，说明你还没有配置昵称和邮箱。那么就需要进行配置，配置昵称的命令参考如下：</p>
+</div><div class="cl-preview-section"><pre><code>git config --global user.name "你的昵称"
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">配置邮箱的命令参考如下：</p>
+</div><div class="cl-preview-section"><pre><code>git config --global user.email "你的邮箱"
+</code></pre>
+</div><div class="cl-preview-section"><h3 id="修改配置信息">3.2.3 修改配置信息</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在配置中如果不小心配置错了，或者后面想修改配置的时候，是不能通过重复执行上面的设置昵称命令，来修改昵称的，邮箱修改同理。如果你多次设置昵称，它会在命令执行后提示你无法重复配置，当然也有可能不给你提示，然后导致一个 key 配置了多个 value 的问题。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">修改的时候，可以通过特定的方式去修改，这里我介绍两种方法， 第一种是通过命令行，第二种是通过修改配置文件。</p>
+</div><div class="cl-preview-section"><h4 id="命令行修改配置" style="font-size: 26px;">命令行修改配置</h4>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通过命令行修改的方式比较简单，直接执行以下的命令即可，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git config --global --replace-all user.name "your user name"
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">修改邮箱地址参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git config --global --replace-all user.email"your user email"
+</code></pre>
+</div><div class="cl-preview-section"><h4 id="修改配置文件" style="font-size: 26px;">修改配置文件</h4>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">修改文件的方式，主要是修改位于主目录下<code>.gitconfig</code> 文件。在 Linux 和 Mac 中，可以通过 vim 命令进行直接编辑，比如 <code>vim ~/.gitconfig</code> ；Windows 系统同样位于用户主目录下，假设你当前的用户是 <code>administrator</code>，那么对应的配置文件的路径应该是 <code>C:\Users\administrator\.gitconfig</code>，可以直接使用记事本修改里边的 name 或者 email。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果之前已经配置过昵称和邮箱的情况下，当使用 vim 或者记事本打开配置文件之后，可以看到如下配置：</p>
+</div><div class="cl-preview-section"><pre><code>[user]
+        name = daxia
+        email = 78778443@qq.com
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在如果有重复的 name 或 email，可以将其删掉，只剩下一个就好。修改完，通过 git bash 输入 git config –list 可以查看是否修改成功了。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">3.3 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">这一节中主要讲到了如何创建一个本地版本库、版本库的大体结构 、基础配置方法等。</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">在空文件夹中，可以通过命令 <code>git init</code> 创建一个本地版本库；</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">每个版本库的根目录下，都存放着一个<code>.git</code> 的隐藏文件夹，里面包含版本库的全部信息；</p>
+</li>
+<li style="font-size: 20px; line-height: 38px;">
+<p style="font-size: 20px; line-height: 38px;">管理版本库必须有一个身份，需要设置昵称和邮箱。</p>
+</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1009">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            02 环境准备：在各系统中快速安装 git 环境
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1011">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            04 拉取远端代码：使用Git命令下载远程仓库到本地
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

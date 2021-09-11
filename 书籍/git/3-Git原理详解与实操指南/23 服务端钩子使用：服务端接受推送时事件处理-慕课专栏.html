@@ -1,0 +1,256 @@
+<html><head><meta charset="utf-8"><title>23 服务端钩子使用：服务端接受推送时事件处理-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        23 服务端钩子使用：服务端接受推送时事件处理
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-11-19 10:43:28
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img3.mukewang.com/5dd1d2de0001239b06400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">机会不会上门来找人，只有人去找机会。<p class="author">——狄更斯</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上一节中，我们学习了客户端钩子使用，在这一节中我们继续学习服务端的钩子使用，服务端钩子同样存放在<code>.git</code> 目录下，不过是放在服务端的<code>.git</code> 目录下，钩子文件名称也有相对应的文件名，但这里并不需要大家去记，因为我们平时使用服务端钩子基本不会通过文件名去找对应的钩子。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">通常搭建 Git 服务器后，并不需要我们登陆服务器去编辑 .git/hooks 目录下的钩子，而是在 web 页面中设置，在这节中我们以使用者角度去讲解钩子使用方法，只需要在 web 管理界面设置钩子地址即可。</p>
+</div><div class="cl-preview-section"><h2 id="设置钩子事件" style="font-size: 30px;">23.1  设置钩子事件</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们依然以码云平台为例，在码云平台中设置服务端钩子需要找到仓库的<code>管理</code> -&gt;<code>WebHooks</code>-&gt; <code>增加</code>页面，然后将我们的 URL 地址准备好就可以了。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">当我们使用 <code>git push</code> 命令推送代码到码云平台时候，码云接收成功就会调用我们此 URL 地址，并将事件的参数传递到设置的 URL 地址中，设置钩子方法如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/01.png" data-original="http://startgit.songboy.net/23/01.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上图中，我们在 WebHook 中填写了一个外网可访问的 URL 地址，这个地址的后端使用何种语言都可以，只要能接收参数并执行代码即可，我们的钩子操作将在这份代码里面实现。</p>
+</div><div class="cl-preview-section"><h2 id="分析钩子参数" style="font-size: 30px;">23.2  分析钩子参数</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在设置好钩子地址之后，在编写钩子代码之前，我需要知道码云平台会将哪些参数给我传递过来，才好进行下一步编写。因此我在编写钩子代码最开始的位置，会先将参数接收，然后保存到本地，用来分析钩子的参数结构。</p>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">大家在实践我这个实验的时候，需要在你的服务器中安装 PHP 运行环境，每个系统的安装方法有一定的区别，这篇文章不展开怎么安装 PHP+Nginx 环境了。</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">下面是我用 PHP 代码实现钩子的接收，我这里使用 vim 去编辑 PHP 代码文件，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>vim index.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">vim 命令执行之后，我需要在里面编写钩子所执行的具体代码，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/02.png" data-original="http://startgit.songboy.net/23/02.png" alt="image"><br>
+在上图当中，我用 PHP 语言编写，首先接收了码云传递过来的参数，然后将参数写入到文件当中，为了方便大家做实验：</p>
+</div><div class="cl-preview-section"><pre class=" language-php"><code class="prism  language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+	<span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">//存储日志信息</span>
+	<span class="token function">file_put_contents</span><span class="token punctuation">(</span><span class="token string">'/tmp/gitee.json'</span><span class="token punctuation">,</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">json_decode</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">钩子代码准备完毕之后，我们回到本地代码仓库，在仓库中修改代码，然后提交新版本并推送到码云中，码云便会调用我们的钩子接口，修改代码命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">echo '123123'  &gt;  a.txt  &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，Git 仓库的文件状态如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/03.png" data-original="http://startgit.songboy.net/23/03.png" alt="image"><br>
+在上图中，可以看到文件 <code>a.txt</code> 处于新增状态，接着我们将此文件通过 <code>git commit</code> 提交到新版本当中，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git add . &amp;&amp; git commit . -m '服务端钩子测试'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/04.png" data-original="http://startgit.songboy.net/23/04.png" alt="image"><br>
+在上图中，可以看到已经将新增加的文件添加到版本控制器当中，我们可以使用 <code>git log</code> 命令查看一下版本列表，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的版本信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/11.png" data-original="http://startgit.songboy.net/23/11.png" alt="image"><br>
+在上图中我们可以看出已经新增版本成功， 接着我们使用 <code>git push</code> 推送到码云平台中，推送后码云便会调用我们的钩子事件，推送到远程仓库的命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>git push
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，远端返回的信息如下所示：<br>
+<img class="" src="http://startgit.songboy.net/23/12.png" data-original="http://startgit.songboy.net/23/12.png" alt="image"><br>
+在图中我们可以看到码云平台接收推送的数据已经成功，推送完成之后，我们去钩子所在的服务器查看参数是否被打印出来，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>cat /tmp/gitee.json
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，如果提示文件不存在，那么可能你填写在码云的 URL 地址不正确，可以先自己打开 URL 尝试是否能打开；如果执行之后能查看到里面的参数，就说明钩子调用成功，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/05.png" data-original="http://startgit.songboy.net/23/05.png" alt="image"><br>
+在上图中可以看到一串 Json 格式的数据，我们将内容复制出来，然后去<a href="http://www.box3.cn/">开发工具箱</a>点击通用代码美化，就会将压缩的 Json 数据格式化出来，便于我们分析， 如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/06.png" data-original="http://startgit.songboy.net/23/06.png" alt="image"><br>
+在上图中，可以看到很多个参数，其中 <code>after</code> 和 <code>before</code> 参数分别代表是接收推送之前的 commitid 和接收之后的 commitid，在我们这个钩子中暂时不需要用到这两个。</p>
+</div><div class="cl-preview-section"><h2 id="编写钩子代码" style="font-size: 30px;">23.3  编写钩子代码</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在最上方有一个 <code>ref</code> 参数，我们可以用来判断提交的分支是哪一个，比如我们只在 master 分支收到推送的时候才更新，那么就可以判断值里面是否包含 <code>master</code>，根据需要分析了钩子的参数之后，我们就可以继续编写钩子的代码了，在这里需要注意：</p>
+</div><div class="cl-preview-section"><blockquote>
+<p style="font-size: 20px; line-height: 38px;">后台的程序一定要有操作 Git 的权限，Nginx 运行和 PHP 的运行用户与当前登陆的账户是否一致。</p>
+</blockquote>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">现在我们先手动新建目录，并且把码云仓库的代码克隆下来，执行的命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">cd /data/code &amp;&amp; git clone git@gitee.com:songboy/test201907.git
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/07.png" data-original="http://startgit.songboy.net/23/07.png" alt="image"><br>
+在上图中可以看到远程仓库的代码已经被克隆到本地了，接着我们开始编写钩子代码，这里我使用 vim 编辑器去编辑，执行的命令如下所示：</p>
+</div><div class="cl-preview-section"><pre><code>vim index.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，会出现一个 vim 提供的编辑界面，我们在里面编写代码，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/08.png" data-original="http://startgit.songboy.net/23/08.png" alt="image"><br>
+为了大家调试方便，我将上图中的代码复制了下来，参考代码如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-php"><code class="prism  language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+        <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//存储日志信息</span>
+        <span class="token function">file_put_contents</span><span class="token punctuation">(</span><span class="token string">'/tmp/gitee.json'</span><span class="token punctuation">,</span><span class="token variable">$info</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token variable">$info</span> <span class="token operator">=</span> <span class="token function">json_decode</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//如果推送的分支是master，则更新代码</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">strpos</span><span class="token punctuation">(</span><span class="token variable">$info</span><span class="token punctuation">[</span><span class="token string">'ref'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'master'</span><span class="token punctuation">)</span> <span class="token operator">!==</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">shell_exec</span><span class="token punctuation">(</span><span class="token string">"cd /data/code/test201907 &amp;&amp;  git pull 2&lt;&amp;1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</span></code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">代码逻辑比较简单，首先是接收参数，然后将参数使用 <code>json_decode</code> 函数转换为数组，在判断参数 <code>ref</code> 中是否包含了 <code>master</code> 字符，如果包含说明推送的分支是 <code>master</code> 分支，那么就进入刚才克隆代码的目录，并执行 <code>git pull</code> 命令。</p>
+</div><div class="cl-preview-section"><h2 id="验证钩子效果" style="font-size: 30px;">23.4  验证钩子效果</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">钩子代码写完之后，我们回到本地的开发仓库，重新修改代码，提交新版本并推送到远程仓库中，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">echo   'daxia' &gt; c.txt  &amp;&amp; git add . &amp;&amp; git commit . -m  '推送服务端钩子测试V2' &amp;&amp; git push
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/09.png" data-original="http://startgit.songboy.net/23/09.png" alt="image"><br>
+在上图中可以看到已经将新版本推送到码云平台中，推送后，码云平台依然会调用我们的 URL 地址，然后我们 URL 对应的钩子事件会被执行，执行后会拉取最新代码到本地，现在我们进入刚才新建的仓库目录，并查看版本记录，执行命令如下所示：</p>
+</div><div class="cl-preview-section"><pre class=" language-shell"><code class="prism  language-shell">cd /data/code/test201907 &amp;&amp; git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/23/10.png" data-original="http://startgit.songboy.net/23/10.png" alt="image"><br>
+在上图中可以看到我们在本地仓库推送到码云的新版本已经被钩子拉取下来。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">如果发现仓库版本并没有变更，你可以按照以下 2 步骤进行检查：</p>
+</div><div class="cl-preview-section"><blockquote>
+<ol>
+<li style="font-size: 20px; line-height: 38px;">本地版本是否成功推送到码云平台</li>
+<li style="font-size: 20px; line-height: 38px;">码云平台设置的钩子地址是否能被公网所访问</li>
+<li style="font-size: 20px; line-height: 38px;">钩子增加访问日志，查看码云是否访问到钩子</li>
+<li style="font-size: 20px; line-height: 38px;">手动执行 <code>git pull</code> 命令是否能拉取代码</li>
+<li style="font-size: 20px; line-height: 38px;">检查钩子需要操作仓库的位置文件夹的权限是否足够</li>
+<li style="font-size: 20px; line-height: 38px;">使用 <code>ps -ef</code> 命令检查运行钩子的账户，是否有权限拉取 Git 仓库</li>
+</ol>
+</blockquote>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">23.5 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节当中，我们主要学习服务端钩子的使用方法，主要有以下 3 个步骤：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">在 Git 服务端的 web 页面中设置一个钩子地址，需要公网可访问</li>
+<li style="font-size: 20px; line-height: 38px;">编写钩子代码，支持各种语言，根据需要可以分析钩子的参数</li>
+<li style="font-size: 20px; line-height: 38px;">验证钩子运行效果，通常大部分不成功的原因是因为权限不正确</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1029">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            22 客户端钩子使用：提交代码时触发事件案例
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1031">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            24 代码冲突解决：多人提交代码发生冲突解决方法
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img3.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

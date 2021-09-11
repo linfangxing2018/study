@@ -1,0 +1,244 @@
+<html><head><meta charset="utf-8"><title>19 比较历史版本差异：比较两个分支下指定版本的区别-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        19 比较历史版本差异：比较两个分支下指定版本的区别
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-11-08 10:40:04
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img1.mukewang.com/5daee0d20001d73106400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">成功＝艰苦的劳动＋正确的方法＋少谈空话。<p class="author">——爱因斯坦</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面的章节中，我们学习了对比分支间的差异，包括文件差异，代码差异等。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节中重点讲解通过 <code>git diff</code> 命令的使用，包括了同分支不同版本的差异、不同分支不同版本的差异两部分。</p>
+</div><div class="cl-preview-section"><h2 id="同分支不同版本差异" style="font-size: 30px;">19.1 同分支不同版本差异</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有时候，我们需要查看当前分支的最新版本或工作区和两天前的某一个版本有什么区别，此时便是在同一个分支进行对比，两种对比的方法略有不同。</p>
+</div><div class="cl-preview-section"><h3 id="工作区与历史版本">19.1.1 工作区与历史版本</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我们先来学习一下如何使用工作区和历史版本进行对比，首先我们需要通过 <code>git log</code> 命令查看历史记录，然后找到需要对比的 commitid，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的版本记录如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/01.png" data-original="http://startgit.songboy.net/19/01.png" alt="image"><br>
+在上图中，我们可以通过版本的注释和相应的日期找到对应的版本的 commitid，将它复制下来，接着就可以使用 <code>git diff</code> 命令对比代码差异，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff 6d8feb147973711d08211f953f3d7c463ee1e88f
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这条命令中，第三个参数便是要对比的版本的 commitid，如果不填默认值是当前分支的最后一个版本 id，如果 commitid 则是当前的工作区与此版本进行对比，命令执行完毕之后，返回的结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/02.png" data-original="http://startgit.songboy.net/19/02.png" alt="image"><br>
+在图中可以看出当前的工作区相比指定的版本，<code>index.php</code> 文件中少了一行。</p>
+</div><div class="cl-preview-section"><h3 id="两个历史版本对比">19.1.2 两个历史版本对比</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有些时候我们除了拿当前的工作区与某一个版本进行对比，还会有两个版本间的对比需求，此时我们则在 <code>git diff</code> 命令中传递两个版本号即可，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff 4c64ecd48d7ac2b32b35ece080a5ae1f7256f9d9 6d8feb147973711d08211f953f3d7c463ee1e88f
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，会把命令中最后一个参数的版本与前面一个参数的版本进行对比，返回的结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/03.png" data-original="http://startgit.songboy.net/19/03.png" alt="image"><br>
+在图中可以看到有多个文件有发生过变更，绿色部分为增加的代码部分。</p>
+</div><div class="cl-preview-section"><h2 id="跨分支比较差异" style="font-size: 30px;">19.2 跨分支比较差异</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在一些少数情况下我们还会跨分支比较代码差异，下面我们来构造实验环境，然后跨分支对比版本差异；</p>
+</div><div class="cl-preview-section"><h3 id="实验环境准备">19.2.1 实验环境准备</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">首先我们需要新建一个一模一样分支，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout -b difftest
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在执行的命令中，参数 <code>-b</code> 的作用为新建分支，参数 <code>difftest</code> 则是需要创建的分支名，命令执行后，返回的结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/04.png" data-original="http://startgit.songboy.net/19/04.png" alt="image"><br>
+在图中可以看到已经新建分支成功，并自动切换到了 <code>difftest</code> 中，接着我们再修改代码并查看修改状态，参考命令如下</p>
+</div><div class="cl-preview-section"><pre><code>echo 'diff测试' &gt; diff.php  &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，返回的结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/05.png" data-original="http://startgit.songboy.net/19/05.png" alt="image"><br>
+在图中可以看到文件 <code>diff.php</code> 已经被修改，接着我们将修改的内容提交到版本控制器中，参考命令如下图所示：</p>
+</div><div class="cl-preview-section"><pre><code>git add . &amp;&amp; git commit . -m '新增加一个文件'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/06.png" data-original="http://startgit.songboy.net/19/06.png" alt="image"><br>
+在图中可以看到 Git 提示有一个文件被修改，增加了一行代码，说明已经提交成功。</p>
+</div><div class="cl-preview-section"><h3 id="不同分支不同版本比较">19.2.2 不同分支不同版本比较</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们将此分支与其他分支最新版本进行比较，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff master
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在命令中最后一个参数 <code>master</code> 代表的是分支名，Git 会自动获取该分支下最后一个版本的 commit，命令执行之后返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/07.png" data-original="http://startgit.songboy.net/19/07.png" alt="image"><br>
+在图中可以看到当前分支的最后一个版本与 master 分支的差异提示，此时我们是将两个分支的最新版本进行对比。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">但有些时候我们可能还会将两个分支的历史版本进行对比。接下来我们来尝试一下，首先使用 <code>git log</code> 查看当前版本的 commit，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，Git 返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/08.png" data-original="http://startgit.songboy.net/19/08.png" alt="image"><br>
+我们将上图中的一个 commitid 复制下来，接着去执行切换分支操作，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git checkout master
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/09.png" data-original="http://startgit.songboy.net/19/09.png" alt="image"><br>
+在图中可以看出已经切换到了 master 分支。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我需要在当前分支修改文件，并查看 Git 的工作区状态，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>echo '在master分支中diff测试' &gt; diff.php  &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/10.png" data-original="http://startgit.songboy.net/19/10.png" alt="image"><br>
+可以看到文件状态为被修改的状态，接下来我将修改的文件提交一个新版本，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code> git add . &amp;&amp; git commit . -m '新增加一个文件'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/11.png" data-original="http://startgit.songboy.net/19/11.png" alt="image"><br>
+在上图中可以看到已经成功创建一个文件到 Git 仓库当中，接着我使用当前分支版本对比另外一个分支历史版本，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff e3670cd2a424184d12dd860f471fe5d1c876e0cd
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在上面的参考命令中，commitid 是 <code>difftest</code> 分支的一个历史记录，命令执行之后返回的信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/12.png" data-original="http://startgit.songboy.net/19/12.png" alt="image"><br>
+在上图中可以看到，已经展示了当前分支最新版本与另外一个分支的历史版本的差异，说明 <code>git diff</code> 命令是可以跨分支进行对比的。</p>
+</div><div class="cl-preview-section"><h3 id="section">19.2.3</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们再做一个实验，用当前分支的历史版本与 <code>difftest</code> 分支的历史版本进行对比，依然通过 <code>git log</code> 命令找一个当前分支历史版本的 <code>commitid</code>，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git log
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，可以看到当前分支的版本记录，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/13.png" data-original="http://startgit.songboy.net/19/13.png" alt="image"><br>
+在上图中我们任意选择一个版本的 commitid，然后将它复制下来，接着就可以使用当前分支的历史版本对比另外一个分支历史版本，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git diff a02b2c7c023ae28c5e1a90209d7172f4c759fa35 e3670cd2a424184d12dd860f471fe5d1c876e0cd
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回的差异信息如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/19/14.png" data-original="http://startgit.songboy.net/19/14.png" alt="image"><br>
+在图中我们看到已经展示出了差异部分信息，说明可以跨分支比较两个版本信息的。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">19.3 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一章节当中我们主要加强了对 <code>git diff</code> 的理解，<code>git diff</code> 不仅可以比较工作区与最后一个版本的差异，还可以比较两个任意版本的区别，即使两个版本不在一个分支当中；</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节当中我们主要做的实验有下面几个：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">工作区与当前分支历史版本差异；</li>
+<li style="font-size: 20px; line-height: 38px;">当前分支下的两个历史版本差异；</li>
+<li style="font-size: 20px; line-height: 38px;">当前分支最新版本与其他分支最新版本的差异；</li>
+<li style="font-size: 20px; line-height: 38px;">当前分支最新版本与其他分支历史版本差异；</li>
+<li style="font-size: 20px; line-height: 38px;">当前分支历史版本与其他分支历史版本差异。</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1025">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            18 恢复已删除的分支：恢复误删除的分支数据
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1027">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            20 单独回滚代码：记录不变只回滚代码
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img1.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>

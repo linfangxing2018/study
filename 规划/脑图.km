@@ -1,0 +1,89 @@
+{
+    "root": {
+        "data": {
+            "id": "ce5dycd0w1k0",
+            "created": 1631193829770,
+            "text": "javascript"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "ce5e084a5vs0",
+                    "created": 1631193977263,
+                    "text": "基本数据类型(6种）",
+                    "expandState": "expand",
+                    "progress": null
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "ce5e13wcqzk0",
+                            "created": 1631194046440,
+                            "text": "1. typeof操作符",
+                            "layout_right_offset": {
+                                "x": 142,
+                                "y": -119
+                            }
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "ce67zbz0ezk0",
+                            "created": 1631278540584,
+                            "text": "2. 数值转换，精确度",
+                            "layout_right_offset": {
+                                "x": 144,
+                                "y": -125
+                            }
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "ce5e09sahps0",
+                    "created": 1631193980891,
+                    "text": "topic"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "ce5e0bbccko0",
+                    "created": 1631193984220,
+                    "text": "topic"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "ce5e0c2wnds0",
+                    "created": 1631193985887,
+                    "text": "topic"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "ce5e0cthmao0",
+                    "created": 1631193987494,
+                    "text": "topic"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "ce5e0evs70g0",
+                    "created": 1631193991986,
+                    "text": "topic"
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

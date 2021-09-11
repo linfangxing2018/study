@@ -1,0 +1,222 @@
+<html><head><meta charset="utf-8"><title>11 文件忽略进阶：忽略已加入版本控制器的文件-慕课专栏</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+			<meta name="renderer" content="webkit">
+			<meta property="qc:admins" content="77103107776157736375">
+			<meta property="wb:webmaster" content="c4f857219bfae3cb">
+			<meta http-equiv="Access-Control-Allow-Origin" content="*">
+			<meta http-equiv="Cache-Control" content="no-transform ">
+			<meta http-equiv="Cache-Control" content="no-siteapp">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://www.imooc.com/static/img/common/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://www.imooc.com/static/img/common/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://www.imooc.com/static/img/common/touch-icon-ipad-retina.png">
+			<link href="https://moco.imooc.com/captcha/style/captcha.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201907021539" type="text/css">
+			<link rel="stylesheet" href="https://www.imooc.com/static/lib/swiper/swiper-3.4.2.min.css?t=201907021539">
+			<link rel="stylesheet" href="https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,column/zhuanlanChapter-less.css?t=2.5,course/inc/course_tipoff-less.css?t=2.5?v=201907051055" type="text/css">
+			<link charset="utf-8" rel="stylesheet" href="https://www.imooc.com/static/lib/ueditor/themes/imooc/css/ueditor.css?v=201907021539"><link rel="stylesheet" href="https://www.imooc.com/static/lib/baiduShare/api/css/share_style0_16.css?v=6aba13f0.css"></head>
+			<body><div id="main">
+
+
+<div class="main-con hide-menu">
+    <!-- 左侧菜单 & 索引 -->
+    
+    <div class="right-content" style="padding-left: 0px;">
+        <div class="container clearfix" id="top" style="width: 1134px; display: block;">
+            
+            
+            <div class="center_con js-center_con l" style="width: 1134px;">
+                <div class="article-con">
+                                            <!-- 买过的阅读 -->
+                        
+
+                    
+                    <div class="art-title" style="margin-top: 0px;">
+                        11 文件忽略进阶：忽略已加入版本控制器的文件
+                    </div>
+                    <div class="art-info clearfix">
+                        
+                        <span class="l">
+                            更新时间：2019-10-16 17:50:41
+                        </span>
+                    </div>
+                    <div class="art-top">
+                                                <img src="https://img3.mukewang.com/5da6e2640001257306400359.jpg" alt="">
+                                                                        <div class="famous-word-box">
+                            <img src="https://www.imooc.com/static/img/column/bg-l.png" alt="" class="bg1 bg">
+                            <img src="https://www.imooc.com/static/img/column/bg-r.png" alt="" class="bg2 bg">
+                            <div class="famous-word">对自己不满是任何真正有才能的人的根本特征之一。<p class="author">——契诃夫</p></div>
+                        </div>
+                                            </div>
+                    <div class="art-content js-lookimg">
+                        <div id="article_content">
+                            <div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在前面我们学习常见的忽略文件操作方法，大多数情况下已经满足日常使用，但有时候也会有一些特殊需求用之前的方法并不好处理。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">比如说，想忽略某一个文件夹下的绝大多数文件，保留个别文件；再比如已经加入到版本控制器的文件，再去设置忽略规则不起效果等问题，这些问题通过本节内容，你可以轻松的应对，主要内容有：设置忽略排除、忽略已提交的文件。</p>
+</div><div class="cl-preview-section"><h2 id="设置忽略排除" style="font-size: 30px;">10.1 设置忽略排除</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">按照前面所学的知识，在设置文件忽略时候，我们会在<code>.gitignore</code> 文件中将目录添加进去，比如，在你的项目中如果使用了 composer，那么通常会产生一个 vendor 文件夹，这个文件夹通常是由 composer 管理，所以一般我们会在<code>.gitignore</code> 文件添加路径忽略它，如下图编辑 .gitignore 文件所示。</p>
+</div><div class="cl-preview-section"><h3 id="忽略文件夹">10.1.1 忽略文件夹</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;"><img class="" src="http://startgit.songboy.net/11/01.png" data-original="http://startgit.songboy.net/11/01.png" alt="image"><br>
+在图中可以看到，路径中会设置星号，这是表示匹配所有文件 (<strong>因为后续需要排除此文件夹下的某个文件，所以这里的星号一定要加上</strong>)，保存修改后，我们再回到终端交互中，查看当前文件的修改，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行之后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/02.png" data-original="http://startgit.songboy.net/11/02.png" alt="image"><br>
+在图中可以看到 git 并没有提示我们心中了一个 test 文件夹，说明成功忽略了 <code>test</code> 文件夹以及下面的文件。</p>
+</div><div class="cl-preview-section"><h3 id="设置反向排除">10.1.2 设置反向排除</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接下来我们再次去编辑 <code>.gitignore</code> 文件，设置忽略规则里面加上排除规则，参考规则如下：</p>
+</div><div class="cl-preview-section"><pre><code>!/test/index.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">使用 vim 编辑界面如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/03.png" data-original="http://startgit.songboy.net/11/03.png" alt="image"><br>
+在图中的 <code>!</code> 表示要排除的意思，因此在<code>.gitignore</code> 文件夹中加入 <code>!</code> 也可以理解为取反的意思。</p>
+</div><div class="cl-preview-section"><h3 id="反向排除结果验证">10.1.3 反向排除结果验证</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们保存修改，然后回到终端进行交互，再次使用 git 的查看文件状态命令，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/04.png" data-original="http://startgit.songboy.net/11/04.png" alt="image"><br>
+在图中可以看到 Git 提示新增了一个 <code>test</code> 文件夹，这便是因为我们刚才对 <code>test/index.php</code> 文件设置反向忽略规则，所以此时 <code>test</code> 文件夹依然会显示出来，此时设置反向忽略就成功实现了。</p>
+</div><div class="cl-preview-section"><h2 id="忽略已提交文件" style="font-size: 30px;">10.2 忽略已提交文件</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">有的时候，可能一不小心把某一个原本应该忽略的目录提交到了版本控制器中，再使用 <code>.gitignore</code> 文件去忽略的时候，发现无论如何都无法再次将其忽略，只好默默忍受；其实这是因为 git 已经索引了该文件而导致，接下来我带着大家复现并解决此问题。</p>
+</div><div class="cl-preview-section"><h3 id="问题复现">10.2.1 问题复现</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">我先来让这个问题复现，让大家感受一下这个问题，首先我在版本库中创建一个目录并新增一个文件，提交文件到版本控制器中，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>mkdir test2 &amp;&amp; echo '1231' &gt; test2/test.txt &amp;&amp; git add . &amp;&amp; git commit . -m ;测试忽略已提交的文件'
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/05.png" data-original="http://startgit.songboy.net/11/05.png" alt="image"><br>
+通过图中可以看出，我新增了一个目录和文件，并提交到版本库成功。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我在<code>.gitignore</code> 文件中加入，忽略规则，规则参考如下：</p>
+</div><div class="cl-preview-section"><pre><code>test2/*
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">使用 vim 编辑 <code>.gitignore</code> 文件如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/06.png" data-original="http://startgit.songboy.net/11/06.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">增加忽略规则之后，使用 <code>:wq</code> 命令保存，并回到终端交互窗口中，然后去修改我们刚才要忽略的文件，修改之后再查看 Git 会不会提示刚才设置了忽略的文件的修改，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>echo ‘添加到忽略文件后再次修改’ &gt;&gt; test2/test.txt &amp;&amp; git status
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行完毕之后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/07.png" data-original="http://startgit.songboy.net/11/07.png" alt="image"><br>
+在图中依然可以看到已经设置了忽略的文件，git 依然提示改文件被修改。</p>
+</div><div class="cl-preview-section"><h3 id="忽略已存在的文件">10.2.2 忽略已存在的文件</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">遇到上面这种情况时候，我们需要先删除掉该文件的缓存，才能让他成功忽略，所以正确的操作步骤是先在 .gitignore 中设置该文件为忽略，然后执行删除缓存命令，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git rm --cached test2/index.php
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">执行命令之后，再使用 git status 查看是否成功忽略，结果如下所示：<br>
+<img class="" src="http://startgit.songboy.net/11/10.png" data-original="http://startgit.songboy.net/11/10.png" alt="image"><br>
+可以看到 <code>test2/test.txt</code> 已经不再提示被修改了，说明成功了。</p>
+</div><div class="cl-preview-section"><h3 id="忽略已存在的文件夹">10.2.3 忽略已存在的文件夹</h3>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">忽略已存在的文件夹方式和上面基本一致，我现在模拟一个已经存在的文件夹，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/11.png" data-original="http://startgit.songboy.net/11/11.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">然后编辑 <code>.gitignore</code> 文件，在文件中加入要忽略文件夹，如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/12.png" data-original="http://startgit.songboy.net/11/12.png" alt="image"></p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">然后使用删除该文件夹的缓存，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git rm -r --cached test3/
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，同样适用 <code>git status</code> 查看当前的工作区状态，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/13.png" data-original="http://startgit.songboy.net/11/13.png" alt="image"><br>
+在图中可以看到 test3 文件夹已经从缓存中删除了。</p>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">接着我们需要将此修改提交，因为在忽略文件里已经忽略了该文件夹，所以在提交的时候需要注意加上 <code>-f</code> 参数，表示强制添加，参考命令如下：</p>
+</div><div class="cl-preview-section"><pre><code>git add -f test3
+</code></pre>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">命令执行后，返回结果如下图所示：<br>
+<img class="" src="http://startgit.songboy.net/11/14.png" data-original="http://startgit.songboy.net/11/14.png" alt="image"><br>
+在图中已经看不到 <code>test3</code> 文件夹的修改信息，说明忽略已存在的文件夹也成功了。</p>
+</div><div class="cl-preview-section"><h2 id="小结" style="font-size: 30px;">10.3 小结</h2>
+</div><div class="cl-preview-section"><p style="font-size: 20px; line-height: 38px;">在这一节中，我们更进一步的学习了如何处理需要忽略的文件，主要内容有反向忽略规则，和忽略已加入版本控制器的文件，有两点需要注意：</p>
+</div><div class="cl-preview-section"><ol>
+<li style="font-size: 20px; line-height: 38px;">反向忽略应用场景是该文件夹大部分文件需要被忽略，只需要保留少部分的时候</li>
+<li style="font-size: 20px; line-height: 38px;">忽略已存在的文件夹最后一步需要使用 <code>-f</code> 进行强制添加，否则会提示操作失败</li>
+</ol>
+</div>}
+                        </div>
+                    </div>
+                                            <!-- 买过的阅读 -->
+                        <div class="art-next-prev clearfix">
+                                                                                                <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1017">
+                                                                    <div class="prev l clearfix">
+                                        <div class="icon l">
+                                            <i class="imv2-arrow3_l"></i>
+                                        </div>
+                                        <p>
+                                            10 分支管理：掌握快速切换分支和新建分支能力
+                                        </p>
+                                    </div>
+                                </a>
+                                                                                                                            <!-- 已买且开放 或者可以试读 -->
+                                    <a href="/read/51/article/1019">
+                                                                    <div class="next r clearfix">
+                                        <p>
+                                            12 比较分支差异：展示两个分支的差异部分
+                                        </p>
+                                        <div class="icon r">
+                                            <i class="imv2-arrow3_r"></i>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                                    </div>
+                                    </div>
+                <div class="comments-con js-comments-con" id="coments_con">
+                </div>
+
+                
+            </div>
+            
+            
+            
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-jiaQun-new hide" id="modal-jiaQun">
+    <div class="inner" style="">
+        <div class="modal-close js-close-jiaQun">
+            <i class="imv2-close"></i>
+        </div>
+        <div class="content">
+            <img src="https://img2.mukewang.com/5d8870e70001363505400600.jpg">
+            <div class="right-info">
+                <div class="title">
+                    扫码加入慕课前端核心用户群
+                </div>
+                <div class="desc">
+                                            <p class="mb6">验证信息：<span id="joincode">1910241455242182</span><span class="copy js-copy-joincode">复制</span></p>
+                                        <p class="mb6">QQ讨论群号：722466314</p>
+                                            <p>QQ群URL：<a href="https://jq.qq.com/?_wv=1027&amp;k=5l9EFfc" target="_blank">点击访问</a></p>
+                                    </div>
+            </div>
+            <p class="tip">若遇到搜索不到QQ群或加群失败，请联系客服邮箱:kf@imooc.com</p>
+        </div>
+    </div>
+</div>
+ 
+<!-- 专栏介绍页专栏评价 -->
+
+<!-- 专栏介绍页底部三条评价 -->
+
+<!-- 专栏阅读页弹层目录和介绍页页面目录 -->
+
+<!-- 专栏阅读页发布回复 -->
+
+<!-- 专栏阅读页发布评论 -->
+
+<!-- 专栏阅读页底部评论 -->
+
+<!-- 专栏阅读 单个 评论 -->
+
+<!-- 新增回复和展开三条以外回复 -->
+
+<!-- 立即订阅的弹窗 -->
+
+
+
+
+
+
+
+
+
+
+
+
+</div></body></html>
