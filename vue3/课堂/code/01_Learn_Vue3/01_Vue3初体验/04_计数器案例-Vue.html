@@ -12,6 +12,7 @@
 
   <script src="../js/vue.js"></script>
   <script>
+    //   vue3可不写最外层div
     Vue.createApp({
       template: `
         <div>
@@ -21,7 +22,7 @@
           <button @click='decrement'>-1</button>
         </div>
       `,
-      data: function() {
+      data: function() {  // 这个是一个函数
         return {
           message: "Hello World",
           counter: 100
