@@ -13,6 +13,7 @@
   <template id="my-app">
     <div :class="['abc', title]">哈哈哈哈</div>
     <div :class="['abc', title, isActive ? 'active': '']">哈哈哈哈</div>
+    <!-- 数组里面可以嵌套 对象 -->
     <div :class="['abc', title, {active: isActive}]">哈哈哈哈</div>
   </template>
 

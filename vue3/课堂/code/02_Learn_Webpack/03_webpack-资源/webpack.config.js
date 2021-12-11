@@ -30,12 +30,13 @@ module.exports = {
       //   use: {
       //     loader: "url-loader",
       //     options: {
-      //       // outputPath: "img",
+      //       // outputPath: "img", 也可以不写在name那些加 img/
       //       name: "img/[name]_[hash:6].[ext]",
       //       limit: 100 * 1024
       //     }
       //   }
-      // },
+      // },   
+      // 小图片使用base64格式好处: 减少请求数, 写在代码里 浏览器直接解析
       {
         test: /\.(jpe?g|png|gif|svg)$/,
         type: "asset",

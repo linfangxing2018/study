@@ -22,6 +22,7 @@
 
   <script src="../js/vue.js"></script>
   <script>
+    // 这里就是window
     document.querySelector("#why")
     Vue.createApp({
       template: '#why',
@@ -51,8 +52,10 @@
           // this === window? 不可以
           // 写成一个箭头函数时, 这个this就是window
           // 在箭头函数中是不绑定this, 但是函数中如果使用了this
+          // 箭头函数不使用this的四种标准规则（也就是不绑定this），而是根据外层作用域来决定this。（一层一层往上走 ）
           console.log(this);
         }
+        // 普通函数调用this默认绑定window
       }
     }).mount('#app');
 

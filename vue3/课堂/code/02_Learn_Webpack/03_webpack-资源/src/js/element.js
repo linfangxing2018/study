@@ -16,6 +16,7 @@ bgDivEl.className = "image-bg";
 
 // 设置img元素的src
 const imgEl = document.createElement('img');
+// imgEl.src = '../img/zznh.png'; 不可以这么写, 这么到时候渲染到页面上是根据根目录来查找, 就找不到, 要像一个模块一样引进来, require('../img/zznh.png')
 imgEl.src = zzhnImage;
 
 // i元素

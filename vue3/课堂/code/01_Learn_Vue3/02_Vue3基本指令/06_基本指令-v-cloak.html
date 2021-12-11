@@ -16,6 +16,7 @@
   <div id="app"></div>
 
   <template id="my-app">
+    <!-- 有时候还没渲染完可能在浏览器先展示了成 {{message}}, 当渲染完vue会删除v-cloak这个属性 -->
     <h2 v-cloak>{{message}}</h2>
   </template>
 
