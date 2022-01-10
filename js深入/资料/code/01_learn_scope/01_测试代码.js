@@ -16,3 +16,16 @@
 
 // outer()
 
+
+// 断点 + F5调试
+let a = 9
+
+function fn() {
+  console.log(a)
+}
+function cn() {
+  let a = 15
+  fn()
+}
+cn()
+
