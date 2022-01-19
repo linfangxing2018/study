@@ -5,7 +5,7 @@
 //   console.log(this)
 // }
 
-// foo()
+// foo() 
 // var obj = {foo: foo}
 // obj.foo()
 // foo.call("abc")
@@ -19,7 +19,7 @@ var obj = {
     // var _this = this
     // setTimeout(function() {
     //   var result = ["abc", "cba", "nba"]
-    //   _this.data = result
+    //   _this.data = result 
     // }, 2000);
     // 箭头函数之后
     setTimeout(() => {

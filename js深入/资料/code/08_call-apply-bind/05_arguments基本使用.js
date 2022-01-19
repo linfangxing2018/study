@@ -1,6 +1,14 @@
+// 创建AO对象时, 参数也被加进入
+// var ao= {
+//   num1: undefined,
+//   num2: undefined,
+//   num3: undefined,
+//   arguments
+// }
+
 function foo(num1, num2, num3) {
   // 类数组对象中(长的像是一个数组, 本质上是一个对象): arguments
-  // console.log(arguments)
+  console.log(arguments)
 
   // 常见的对arguments的操作是三个
   // 1.获取参数的长度
@@ -13,7 +21,7 @@ function foo(num1, num2, num3) {
 
   // 3.callee获取当前arguments所在的函数
   console.log(arguments.callee)
-  // arguments.callee()
+  // arguments.callee()  // 这样会递归
 }
-
+// foo()
 foo(10, 20, 30, 40, 50)

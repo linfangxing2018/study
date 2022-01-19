@@ -1,4 +1,4 @@
-// rest parameters
+// rest parameters  剩余参数
 function sum(...nums) {
   console.log(nums)
 }

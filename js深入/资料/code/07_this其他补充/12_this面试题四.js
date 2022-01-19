@@ -10,6 +10,7 @@ function Person (name) {
       }
     },
     foo2: function () {
+      // this >> obj  这个函数的作用域保存的this是obj
       return () => {
         console.log(this.name)
       }

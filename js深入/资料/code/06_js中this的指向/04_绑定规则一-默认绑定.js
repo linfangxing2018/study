@@ -33,7 +33,7 @@
 // }
 
 // var bar = obj.foo
-// bar() // window
+// bar() // window    只与调用的时候有关, 跟定义的位置是无关的
 
 
 // 4.案例四:

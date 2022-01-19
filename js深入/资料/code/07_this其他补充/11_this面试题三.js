@@ -1,6 +1,19 @@
+// 调用一个函数的几种方式
+// foo()
+// foo.call()
+// foo.apply()
+
+// 这个是块
+{
+
+}
+// 这个是对象字面量, 不是块
+// var obj = {
+
+// }
 var name = 'window'
 
-function Person (name) {
+function Person (name) { // 构造函数
   this.name = name
   this.foo1 = function () {
     console.log(this.name)
@@ -18,7 +31,7 @@ function Person (name) {
   }
 }
 
-var person1 = new Person('person1')
+var person1 = new Person('person1')  // 这两行生成两个不一样的对象
 var person2 = new Person('person2')
 
 person1.foo1() // person1
