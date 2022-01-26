@@ -1,3 +1,8 @@
+// 定义对象并不会产生作用域, 所以foo的上层作用域是window
+// var obj = {
+//   foo: () =>  {}
+// }
+
 var name = 'window'
 
 var person1 = {
@@ -6,7 +11,7 @@ var person1 = {
     console.log(this.name)
   },
   foo2: () => console.log(this.name),
-  foo3: function () {
+  foo3: function () {  // 高阶函数, 一个函数返回另一个函数
     return function () {
       console.log(this.name)
     }

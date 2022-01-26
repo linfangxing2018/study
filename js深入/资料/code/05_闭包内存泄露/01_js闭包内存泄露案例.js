@@ -4,7 +4,7 @@ function createFnArray() {
   // 1 -> number -> 8byte -> 8M
   // js: 10 3.14 -> number -> 8byte ? js引擎
   // 8byte => 2的64次方 => 4byte
-  // 小的数字类型, 在v8中成为Sim, 小数字 2的32次方
+  // 小的数字类型, 在v8中成为Sim, 小数字 2的32次方, v8引擎对小数字做了优化, 只用4个字节
   var arr = new Array(1024 * 1024).fill(1)
   return function() {
     console.log(arr.length)

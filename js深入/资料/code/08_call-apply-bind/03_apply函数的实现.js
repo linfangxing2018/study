@@ -1,4 +1,4 @@
-// 自己实现hyapply
+// 自己实现hyapply     这里得参数argArray不传值默认为undefined, 下面使用 ...argArray会报错
 Function.prototype.hyapply = function(thisArg, argArray) {
   // 1.获取到要执行的函数
   var fn = this
@@ -49,5 +49,6 @@ function bar() {
 // var result2 = foo.hyapply("abc", [20])
 // console.log(result2)
 
-// edge case
+// edge case 边界情况
 bar.hyapply(0)
+bar.hyapply({fn:function(){}})  // es6中 symbol
