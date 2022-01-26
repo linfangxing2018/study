@@ -5,7 +5,7 @@ function Person(name, age, height, address) {
   this.height = height
   this.address = address
 
-  this.eating = function() {
+  this.eating = function() {     // 多次是调用构造函数, 如果里面有函数会在内存创建不同的函数对象, 造成浪费
     console.log(this.name + "在吃东西~")
   }
 
