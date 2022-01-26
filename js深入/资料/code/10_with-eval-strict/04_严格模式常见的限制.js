@@ -1,4 +1,5 @@
 // "use strict"
+// 现在我们开发使用的打包工具, webpack/vite等打包后的js文件都是默认开启了严格模式
 
 // 1. 禁止意外创建全局变量
 // message = "Hello World"
@@ -41,7 +42,7 @@
 
 // 5.with语句不允许使用
 
-// 6.eval函数不会向上引用变量了
+// 6.eval函数不会向上引用变量了, eval是在全局作用域下运行, 非严格模式下,这样写会添加一个全局属性
 var jsString = '"use strict"; var message = "Hello World"; console.log(message);'
 eval(jsString)
 
