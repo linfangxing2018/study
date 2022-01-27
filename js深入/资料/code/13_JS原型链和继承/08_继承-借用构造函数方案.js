@@ -12,14 +12,14 @@ Person.prototype.eating = function() {
 
 // 子类: 特有属性和方法
 function Student(name, age, friends, sno) {
-  Person.call(this, name, age, friends)
+  Person.call(this, name, age, friends)    // 使用这个方法消除下面的3个弊端    //第二次调用Person
   // this.name = name
   // this.age = age
   // this.friends = friends
   this.sno = 111
 }
 
-var p = new Person()
+var p = new Person()   // 调用一次  创建一个新的对象
 Student.prototype = p
 
 Student.prototype.studying = function() {
@@ -47,8 +47,9 @@ var stu2 = new Student("kobe", 30, ["james"], 112)
 // // 直接修改对象上的属性, 是给本对象添加了一个新属性
 // stu1.name = "kobe"
 // console.log(stu2.name)
+// stu1.friends = [] // 这种赋值不会影响
 
-// // 获取引用, 修改引用中的值, 会相互影响
+// // 获取引用, 修改引用中的值, 会相互影响 get操作沿着原型链一层一层往上找
 stu1.friends.push("lucy")
 
 console.log(stu1.friends)
@@ -61,4 +62,6 @@ console.log(stu2.friends)
 
 // 强调: 借用构造函数也是有弊端:
 // 1.第一个弊端: Person函数至少被调用了两次
-// 2.第二个弊端: stu的原型对象上会多出一些属性, 但是这些属性是没有存在的必要
+// 2.第二个弊端: stu的原型对象上会多出一些属性, 但是这些属性是没有存在的必要(p对象)
+
+

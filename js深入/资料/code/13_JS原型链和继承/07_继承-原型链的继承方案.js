@@ -49,5 +49,5 @@ console.log(stu1.friends)
 console.log(stu2.friends)
 
 // 3.第三个弊端: 在前面实现类的过程中都没有传递参数
-// 这样传递参数只能在子类那里接收, 不符合我们想在父类那里接收参数
+// 这样传递参数只能在子类那里接收, 不符合代码的复用
 var stu3 = new Student("lilei", 112)
