@@ -8,6 +8,6 @@ var obj = { name: "why" }
 console.log(obj.__proto__)
 
 // obj.__proto__ => [Object: null prototype] {}
-console.log(obj.__proto__.__proto__)
+console.log(obj.__proto__.__proto__)  // null 
 
 
