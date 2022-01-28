@@ -1,12 +1,13 @@
-function createObject(o) {
+// 最终方案 
+function createObject(o) {  
   function Fn() {}
   Fn.prototype = o
   return new Fn()
 }
 
 function inheritPrototype(SubType, SuperType) {
-  SubType.prototype = Objec.create(SuperType.prototype)
-  Object.defineProperty(SubType.prototype, "constructor", {
+  SubType.prototype = Objec.create(SuperType.prototype)   // 后面创建的对象都是SuperType
+  Object.defineProperty(SubType.prototype, "constructor", {    // 所以要改变constructor, 让他的指为SubType
     enumerable: false,
     configurable: true,
     writable: true,
@@ -48,4 +49,8 @@ stu.running()
 stu.eating()
 
 console.log(stu.constructor.name)
+
+
+
+
 

@@ -20,9 +20,12 @@ function Foo() {
 
 }
 
-console.log(Foo.prototype === Foo.__proto__)
+console.log(Foo.prototype === Foo.__proto__) // false
+// 例外
+console.log(Function.prototype === Function.__proto__) // true
 console.log(Foo.prototype.constructor)
 console.log(Foo.__proto__.constructor)
+
 
 
 var foo1 = new Foo()

@@ -8,8 +8,6 @@ function Person(name, age) {
 }
 
 var p1 = new Person("why", 18)
-console.log(p1.name, p1.age)
-
 var p2 = new Person("kobe", 30)
 console.log(p2.name, p2.age)
 
