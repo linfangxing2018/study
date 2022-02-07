@@ -1,3 +1,16 @@
+// 静态方法Object.defineProperty()直接在对象上定义新属性，或修改对象上现有的属性，并返回该对象。
+// 静态方法直接调用, 不需要重新创建一个新对象
+
+// Object.defineProperty(obj, prop, descriptor)
+// obj
+// 要在其上定义属性的对象。
+
+// prop
+// Symbol要定义或修改的属性的名称或名称。
+
+// descriptor
+// 正在定义或修改的属性的描述符
+
 // name和age虽然没有使用属性描述符来定义, 但是它们也是具备对应的特性的
 // value: 赋值的value
 // configurable: true
@@ -13,7 +26,7 @@ var obj = {
 Object.defineProperty(obj, "address", {
   // 很多配置
   // value: "北京市", // 默认值undefined
-  // 该特殊不可删除/也不可以重新定义属性描述符
+  // 该特性不可删除/也不可以重新定义属性描述符
   // configurable: false, // 默认值false
   // // 该特殊是配置对应的属性(address)是否是可以枚举
   // enumerable: true, // 默认值false

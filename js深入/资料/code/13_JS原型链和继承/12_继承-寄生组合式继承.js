@@ -31,6 +31,7 @@ Person.prototype.eating = function() {
 
 
 function Student(name, age, friends, sno, score) {
+  console.log(this,'231')
   Person.call(this, name, age, friends)
   this.sno = sno
   this.score = score
@@ -42,7 +43,7 @@ Student.prototype.studying = function() {
   console.log("studying~")
 }
 
-var stu = new Student("why", 18, ["kobe"], 111, 100)
+var stu = new Student("why", 18, ["kobe"], 111, 100)   // this指向Student
 console.log(stu)
 stu.studying()
 stu.running()

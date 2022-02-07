@@ -21,7 +21,7 @@ console.log(obj)
 //   })
 // }
 
-Object.seal(obj)
+Object.seal(obj)  // 当前属性的值仍然可以更改，只要它们是可写的。
 
 delete obj.name
 console.log(obj.name)
