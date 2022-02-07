@@ -153,7 +153,8 @@ function _createClass(Constructor, protoProps, staticProps) {
 
 var Person = /*#__PURE__*/ (function () {
   function Person(name, age) {
-    _classCallCheck(this, Person);
+    console.log(this,'34214')
+    _classCallCheck(this, Person);  // 
 
     this.name = name;
     this.age = age;
@@ -185,7 +186,7 @@ var Student = /*#__PURE__*/ (function (_Person) {
     // Person不能被当成一个函数去调用
     // Person.call(this, name, age)
 
-    debugger;
+    debugger;   // 方便调试
     // 创建出来的对象 {name: , age: }
     _this = _super.call(this, name, age);
     _this.sno = sno;

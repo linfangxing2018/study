@@ -30,8 +30,8 @@ class Person {
     this._address = newAddress
   }
 
-  // 类的静态方法(类方法)
-  // Person.createPerson()
+  // 类的静态方法(类方法) 不需要创建实例就行调用   一般用来封装属于这个类的工具方法
+  // Person.createPerson() 通过类名.的方式去访问比如： Promise.all  
   static randomPerson() {
     var nameIndex = Math.floor(Math.random() * names.length)
     var name = names[nameIndex]

@@ -1,3 +1,4 @@
+// 比前面使用构造函数简单一些
 class Person {
   constructor(name, age) {
     this.name = name

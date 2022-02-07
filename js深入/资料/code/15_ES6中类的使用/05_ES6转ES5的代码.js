@@ -9,7 +9,7 @@ class Person {
   }
 }
 
-// babel转换
+// babel转换  在线网站 babel.io
 "use strict";
 
 function _classCallCheck(instance, Constructor) {
@@ -34,8 +34,8 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-// /*#__PURE__*/ 纯函数
-// webpack 压缩 tree-shaking
+// /*#__PURE__*/ 纯函数   方便webpack做tree-shaking 
+// webpack 压缩 tree-shaking   如果我发现你这个函数没有用过, 那我到时候把你直接删掉
 // 这个函数没副作用
 var Person = /*#__PURE__*/ (function () {
   function Person(name, age) {
