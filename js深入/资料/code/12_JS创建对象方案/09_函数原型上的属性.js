@@ -16,7 +16,7 @@ function foo() {
 
 // console.log(foo.prototype)
 
-// prototype.constructor = 构造函数本身
+// prototype.constructor === 构造函数本身
 // console.log(foo.prototype.constructor) // [Function: foo] 指向foo函数
 // console.log(foo.prototype.constructor.name) // 拿到函数的名字, 可以通过 函数名.name拿到函数名字
 

@@ -1,3 +1,4 @@
+// 类默认情况下继承自Object
 // class Person {
 
 // }

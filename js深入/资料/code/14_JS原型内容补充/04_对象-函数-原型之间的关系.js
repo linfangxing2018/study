@@ -13,6 +13,7 @@ console.log(obj.__proto__)
 // Foo是一个对象, 那么它会有一个隐式原型对象: Foo.__proto__
 // Foo.__proto__来自哪里?
 // 答案: new Function()  Foo.__proto__ = Function.prototype
+// console.log(Function.prototype === Function.__proto__) // true
 // Function.prototype = { constructor: Function }
 
 // var Foo = new Function()
