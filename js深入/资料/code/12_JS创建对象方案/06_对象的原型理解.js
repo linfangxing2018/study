@@ -2,6 +2,14 @@
 
 var obj = { name: "why" } // [[prototype]]
 var info = {} // [[prototype]]
+// obj.age = 18
+obj.__proto__.age = 18
+
+console.log(obj.age)
+// obj.age = 18
+obj.__proto__.age = 18
+
+console.log(obj.age)
 
 // 1.解释原型的概念和看一下原型
 // 早期的ECMA是没有规范如何去查看 [[prototype]]
@@ -21,7 +29,7 @@ var info = {} // [[prototype]]
 // 当我们从一个对象中获取某一个属性时, 它会触发 [[get]] 操作
 // 1. 在当前对象中去查找对应的属性, 如果找到就直接使用
 // 2. 如果没有找到, 那么会沿着它的原型去查找 [[prototype]]
-// obj.age = 18
-obj.__proto__.age = 18
 
-console.log(obj.age)
+
+
+

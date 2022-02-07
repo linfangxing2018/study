@@ -22,10 +22,6 @@ obj.__proto__.__proto__.__proto__ = {
 console.log(obj.address)
 
 
-function Person(name) {
-  this.name = name;
-}
-Person.prototype.constructor = Person
 
 
 // 面试题
@@ -33,7 +29,7 @@ Person.prototype.constructor = Person
 // 其实[[prototype]]和__proto__意义相同,都是隐式原型,均表示对象的内部属性，其值指向对象原型。前者在一些书籍、规范中表示一个对象的原型属性，后者则是在浏览器实现中指向对象原型。
 
 // 回答
-// JavaScript当中每个对象都有一个特殊的内置属性[[prototype]]，这个特殊的对象可以指向另外一个对象。
+// JavaScript当中每个对象都有一个特殊的内置属性[[prototype]]，这个特殊的对象可以指向另外一个对象。(原型的概念)
 
 // 那么这个对象有什么用呢？
 // 当我们通过引用对象的属性key来获取一个value时，它会触发[[Get]]的操作；
@@ -45,6 +41,16 @@ Person.prototype.constructor = Person
 // p方式二：通过Object.getPrototypeOf 方法可以获取到
 
 // 所有的函数都有一个prototype的属性：
+// 我们前面讲过new关键字的步骤如下：
+// 在内存中创建一个新的对象（空对象）；
+// 这个对象内部的[[prototype]]属性会被赋值为该构造函数的prototype属性
+// 那么也就意味着我们通过Person构造函数创建出来的所有对象的[[prototype]]属性都指向Person.prototype：
 
+function Person(name) {
+  this.name = name;
+}
+console.log(Person,'22222')
+console.log(Person.prototype.constructor === Person)  // true
+// 默认情况下原型上都会添加一个属性叫做constructor，这个constructor指向当前的函数对象；
   
 
