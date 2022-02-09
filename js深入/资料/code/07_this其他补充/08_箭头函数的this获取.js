@@ -30,3 +30,5 @@ var obj = {
 }
 
 obj.getData()
+// 如果getData也是一个箭头函数，那么setTimeout中的回调函数中的this指向谁呢
+// 会指向window

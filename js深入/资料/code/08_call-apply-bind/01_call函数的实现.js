@@ -5,18 +5,21 @@
 Function.prototype.hycall = function(thisArg, ...args) {  // 剩余参数, 不传值的话默认为 [], 不是类数组,跟arguments不一样
   console.log(Array.isArray(args),'dasfas')  // true
   // 在这里可以去执行调用的那个函数(foo)
-  // 问题: 得可以获取到是哪一个函数执行了hycall
+  // 问题: 得获取到是哪一个函数执行了hycall   sum.hycall
   // 1.获取需要被执行的函数
   var fn = this
 
   // 2.对thisArg转成对象类型(防止它传入的是非对象类型)    当传入null/undefined时, 自动将this绑定成全局对象
-  Object
+  // Object
   thisArg = (thisArg !== null && thisArg !== undefined) ? Object(thisArg): window
 
   // 3.调用需要被执行的函数
-  thisArg.fn = fn  // 隐式绑定
-  var result = thisArg.fn(...args) // 展开运算符
-  delete thisArg.fn   // 避免在函数添加多余的属性
+  // es6中可以使用Symbol
+  // thisArg.fn = fn  // 隐式绑定
+  const symbolfn = Symbol('fn')
+  thisArg[symbolfn] = fn
+  var result = thisArg[symbolfn](...args) // 展开运算符
+  delete thisArg[symbolfn]   // 避免在函数添加多余的属性
 
   // 4.将最终的结果返回出去
   return result
@@ -42,7 +45,7 @@ var result = sum.call({}, 20, 30)
 // 默认进行隐式绑定
 // foo.hycall({name: "why"})
 foo.hycall(undefined)
-var result = sum.hycall("abc", 20, 30)
+var result = sum.hycall("abc", 20, 30) // sum调用了hycall
 console.log("hycall的调用:", result)
 
 // var num = {name: "why"}

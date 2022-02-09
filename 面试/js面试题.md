@@ -1,6 +1,6 @@
 个人觉得带着问题去学习, 可以加深对知识点的理解
 ### 对象
-1. 当我们通过new去调用一个函数时, 和通过的调用到底有什么区别?
+1. 当我们通过<a id="new">new</a>去调用一个函数时, 和通过的调用到底有什么区别? 
   + 在内存中创建一个新的对象（空对象）；
   + 这个对象内部的[[prototype]]属性会被赋值为该构造函数的prototype属性；
   + 构造函数内部的this，会指向创建出来的新对象
@@ -195,3 +195,132 @@
     > 类的访静态方法通常用于定义直接使用类来执行的方法，不需要有类的实例，使用static关键字来定义(一般用来封装属于这个类的工具方法)
     > 比如Person.createPerson() 通过类名.的方式去访问比如： Promise.all  
 
+9. 调用一个函数的方式
+     * fn()
+     * fn.call()
+     * fn.apply()
+     * fn.bind()
+     * new fn()
+     * fn``
+10. this 
+  *  this指向什么, 跟函数所处的位置是没有关系的, this是动态绑定的 
+  * this绑定规则: 
+    + 默认绑定: 独立函数调用    默认绑定window
+    + 隐式绑定: object.fn() object对象会被js引擎绑定到fn函数的中this里面
+    + 显式绑定: call/apply/bind在执行函数时,是可以明确的绑定this(apply传参的方式是数组) 
+    + [new](#new) 绑定 
+  * 规则之外
+    + 忽略显式绑定  apply/call/bind: 当传入null/undefined时, 自动将this绑定成全局对象(默认绑定)
+    + 间接函数引用
+        ``` js
+          function foo() {
+            console.log(this)
+          }
+          const obj1 = {
+            foo: foo
+          }
+          const obj2 = {
+            age: 17
+          };  // 这里一定要写 ;
+          (obj2.foo = obj1.foo)()  // 赋值表达式,是一个间接函数引用,返回等号右边的结果,当作是整个()的返回值, 所以是独立函数调用
+          (obj2.bar)() // 不是赋值表达式, 加不加括号都一样
+        ```
+  * this绑定优先级: 
+    new绑定 > 显式绑定 > 隐式绑定 > 默认绑定
+  * 注意: 
+    1.  一些函数的this分析
+      + setTimeout函数, this指向的是window(setTimeout内部应该是直接调用函数, 默认绑定)
+        ``` js
+          var obj = {
+            data: [],
+            getData: function() {
+              // 发送网络请求, 将结果放到上面data属性中
+              // 在箭头函数之前的解决方案
+              // var _this = this
+              // setTimeout(function() {
+              //   var result = ["abc", "cba", "nba"]
+              //   _this.data = result 
+              // }, 2000);
+              // 箭头函数之后
+              setTimeout(() => {
+                var result = ["abc", "cba", "nba"]
+                this.data = result
+              }, 2000);
+            }
+          }
+          obj.getData()
+          // 如果getData也是一个箭头函数，那么setTimeout中的回调函数中的this指向谁呢
+          // 会指向window  在vs code中运行调试, 对象中 [[scopes]]保存的是空
+        ``` 
+      + 监听点击
+        ``` js
+          const boxDiv = document.querySelector('.box')
+          boxDiv.onclick = function() {
+            console.log(this)
+          }
+          // 内部是这样调用boxDiv.onclick(), 所以是隐式绑定
+        ```
+      + 数组.forEach/map/filter/find
+        ``` js 
+          var names = ["abc", "cba", "nba"]
+          names.forEach(function(item) {
+            console.log(item, this)
+          }, "abc") // 第二个参数是绑定this的指向, 不传默认指向window
+          names.map(function(item) {
+            console.log(item, this)
+          }, "cba")
+        ```
+    2. 箭头函数
+      + 箭头函数不会绑定this、arguments属性; 会从上层作用域中找到对应的this(一层一层往上找, 直到找到window)
+      + 箭头函数不能作为构造函数来使用（不能和new一起来使用，会抛出错误）
+
+11. 手写call/apply/bind
+    ``` js 
+      // call
+      // Funtion.prototype.call
+      Funtion.prototype.call = function(thisArg, ...args) {
+        thisArg = (thisArg === undefined && thisArg === null) ? window : Object(thisArg)
+        const symbolfn = Symbol('fn')
+        const result = thisArg[symbolfn](args)
+        delete thisArg[symbolfn]
+        return result
+      }
+      function foo() {
+        console.log(this)
+      }
+      foo.mycall('abc', 10, 20, 30)
+
+      // apply
+      Function.prototype.mycall = function(thisArg, argArray = []) {
+        thisArg = (thisArg === undefined && thisArg === null) ? window : Object(thisArg)
+        const symbolfn = Symbol('fn')
+        thisArg[symbolfn] = this
+        const result = thisArg[symbolfn](...argArray)
+        delete thisArg[symbolfn]
+        return result
+      }
+      function foo() {
+        console.log(this)
+      }
+      foo.mycall('abc', [10, 20, 30]) 
+
+      // bind
+      Function.prototype.mybind = function(thisArg, ...argArray) {
+        thisArg = (thisArg === undefined && thisArg === null) ? window : Object(thisArg)
+        const symbolfn = Symbol('fn')
+        thisArg[symbolfn] = this
+        return function proxyFn(...args) {
+          const finalArgs = [...argArray, ...args]
+          const result = thisArg[symbolfn](...finalArgs)
+          delete thisArg[symbolfn]
+          return result
+        }
+      }
+      function foo() {
+        console.log(this)
+      }
+      const foo1 = foo.mybind('abc', 10)
+      foo1(20, 30) 
+    ```
+
+12. 函数中的arguments是数组吗？类数组转数组的方法了解一下？

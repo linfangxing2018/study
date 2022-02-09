@@ -1,10 +1,11 @@
 // 1.JavaScript中对象中是不能使用对象来作为key的
 const obj1 = { name: "why" }
 const obj2 = { name: "kobe" }
-
+// 使用变量作为对象属性名 [obj1]
 // const info = {
 //   [obj1]: "aaa",
-//   [obj2]: "bbb"
+//   [obj2]: "bbb",
+//   obj1: 'ccc' // 这样写是使用 'obj1'作为属性名
 // }
 
 // console.log(info)

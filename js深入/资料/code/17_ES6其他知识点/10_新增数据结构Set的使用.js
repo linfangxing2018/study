@@ -27,6 +27,7 @@ const arr = [33, 10, 26, 30, 33, 26]
 //   }
 // }
 
+// 将set转成数组
 const arrSet = new Set(arr)
 // const newArr = Array.from(arrSet)
 // const newArr = [...arrSet]
@@ -44,7 +45,7 @@ console.log(arrSet)
 arrSet.delete(33)
 console.log(arrSet)
 
-// has
+// has 是否包含某个元素
 console.log(arrSet.has(100))
 
 // clear

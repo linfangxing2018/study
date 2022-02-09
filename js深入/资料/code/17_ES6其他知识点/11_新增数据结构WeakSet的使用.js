@@ -5,7 +5,7 @@ const weakSet = new WeakSet()
 // weakSet.add(10)
 
 // 强引用和弱引用的概念(看图)
-
+// GC不会回收强引用
 // 2.区别二: 对对象是一个弱引用
 let obj = { 
   name: "why"
@@ -39,4 +39,4 @@ let p = new Person()
 p.running()
 p = null
 
-p.running.call({name: "why"})
+p.running.call({name: "why"})   // 不希望你这样来调用
