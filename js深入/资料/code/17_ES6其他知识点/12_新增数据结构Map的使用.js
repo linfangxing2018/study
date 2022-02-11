@@ -18,6 +18,8 @@ map.set(obj2, "bbb")
 map.set(1, "ccc")
 console.log(map)
 
+
+// entries
 const map2 = new Map([[obj1, "aaa"], [obj2, "bbb"], [2, "ddd"]])
 console.log(map2)
 

@@ -1,3 +1,4 @@
+// 结尾的逗号
 function foo(m, n,) {
 
 }

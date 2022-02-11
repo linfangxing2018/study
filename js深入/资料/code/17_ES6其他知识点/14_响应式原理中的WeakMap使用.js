@@ -1,6 +1,9 @@
-// 应用场景(vue3响应式原理)
+// 应用场景(vue3响应式原理)   
+// 用WeakMap的原因是因为
+// 1. 弱引用, 如果我们让 obj1 = null, 这个对象就会被GC回收
+// 2. WeakMap可以使用对象作为属性名
 const obj1 = {
-  name: "why",
+  name: "why", // 比如name改变了,就会触发obj1NameFn1, obj1NameFn2
   age: 18
 }
 
@@ -40,7 +43,7 @@ const weakMap = new WeakMap()
 // 2.收集依赖结构
 // 2.1.对obj1收集的数据结构
 const obj1Map = new Map()
-obj1Map.set("name", [obj1NameFn1, obj1NameFn2])
+obj1Map.set("name", [obj1NameFn1, obj1NameFn2])  // 这里使用Map是因为Map既可以使用对象作为属性名, 也可以使用基本数据类型
 obj1Map.set("age", [obj1AgeFn1, obj1AgeFn2])
 weakMap.set(obj1, obj1Map)
 
