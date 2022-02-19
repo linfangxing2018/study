@@ -13,6 +13,7 @@ class HYPromise {
     const resolve = (value) => {
       if (this.status === PROMISE_STATUS_PENDING) {
         this.status = PROMISE_STATUS_FULFILLED
+        // 不使用setTimeout, 因为它是宏任务, promise实现是微任务
         queueMicrotask(() => {
           this.value = value
           this.onFulfilled(this.value)

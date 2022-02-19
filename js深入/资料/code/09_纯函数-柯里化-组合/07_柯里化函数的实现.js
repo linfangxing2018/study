@@ -1,6 +1,6 @@
 // 纯函数不会产生闭包
 // 不用自己一步一步手动写柯里化
-// 函数式编程, 把函数当成第一公民, 函数可以当作返回值
+// 函数式编程, 把函数当成第一公民, 函数可以当作返回值,参数
 function add1(x, y, z) {
   return x + y + z
 }
@@ -31,8 +31,9 @@ function log(date, type, message) {
 
 // 柯里化函数的实现hyCurrying
 function hyCurrying(fn) {
+  // fn是需要柯里化的函数 fn.length拿到fn函数的参数长度
   function curried(...args) {
-    // 判断当前已经接收的参数的个数, 可以参数本身需要接受的参数是否已经一致了
+    // 判断当前已经接收的参数的个数, 判断参数本身需要接受的参数是否已经一致了
     // 1.当已经传入的参数 大于等于 需要的参数时, 就执行函数
     // 默认this指向window
     if (args.length >= fn.length) {
