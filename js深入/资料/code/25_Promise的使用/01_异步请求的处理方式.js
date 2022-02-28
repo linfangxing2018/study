@@ -12,7 +12,7 @@ function requestData(url, successCallback, failtureCallback) {
     // url传入的是coderwhy, 请求成功
     if (url === "coderwhy") {
       // 成功
-      let names = ["abc", "cba", "nba"]
+      let names = ["abc", "cba", "nba"] // 这里为什么要用回调函数而不是直接把names的值返回, 直接返回是拿不到这个值(异步) 26行代码
       successCallback(names)
     } else { // 否则请求失败
       // 失败
@@ -23,6 +23,7 @@ function requestData(url, successCallback, failtureCallback) {
 }
 
 // main.js
+// const request = requestData('kobe')     
 requestData("kobe", (res) => {
   console.log(res)
 }, (err) => {

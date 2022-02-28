@@ -1,48 +1,48 @@
-// async function bar() {
-//   console.log("22222")
-//   return new Promise((resolve) => {
-//     resolve()
-//   })
-// }
-
-// async function foo() {
-//   console.log("111111")
-
-//   await bar()
-
-//   console.log("33333")
-// }
-
-// foo()
-// console.log("444444")
-
-
-async function async1 () {
-  console.log('async1 start')
-  await async2();
-  console.log('async1 end')
+async function bar() {
+  console.log("22222")
+  return new Promise((resolve) => {
+    resolve()
+  })
 }
 
-async function async2 () {
-  console.log('async2')
+async function foo() {
+  console.log("111111")
+
+  await bar()  // await 后面的代码都看作是then
+
+  console.log("33333")
 }
 
-console.log('script start')
+foo()
+console.log("444444")
 
-setTimeout(function () {
-  console.log('setTimeout')
-}, 0)
- 
-async1();
- 
-new Promise (function (resolve) {
-  console.log('promise1')
-  resolve();
-}).then (function () {
-  console.log('promise2')
-})
 
-console.log('script end')
+// async function async1 () {
+//   console.log('async1 start')
+//   await async2();
+//   console.log('async1 end')
+// }
+
+// async function async2 () {
+//   console.log('async2')
+// }
+
+// console.log('script start')
+
+// setTimeout(function () {
+//   console.log('setTimeout')
+// }, 0)
+ 
+// async1();
+ 
+// new Promise (function (resolve) {
+//   console.log('promise1')
+//   resolve();
+// }).then (function () {
+//   console.log('promise2')
+// })
+
+// console.log('script end')
 
 // script start
 // async1 start

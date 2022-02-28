@@ -16,7 +16,7 @@ setTimeout(function () {
 
 setTimeout(function () {
   console.log('setTimeout2')
-}, 300)
+}, 300)   // 300ms之后才放进宏任务队列  看图6
 
 setImmediate(() => console.log('setImmediate'));
 

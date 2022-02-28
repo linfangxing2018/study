@@ -23,7 +23,7 @@ for (const item of set) {
   console.log(item)
 }
 
-// 函数中arguments也是一个可迭代对象
+函数中arguments也是一个可迭代对象
 function foo(x, y, z) {
   console.log(arguments[Symbol.iterator])
   for (const arg of arguments) {
