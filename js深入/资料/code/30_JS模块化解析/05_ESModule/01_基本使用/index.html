@@ -7,6 +7,8 @@
   <title>Document</title>
 </head>
 <body>
-  <script src="./main.js" type="module"></script>
+  <!-- 一定要加 type="module" , 不加的话按照一个普通的js去解析,不是一个模块不可以使用 esModule -->
+  <!-- 不可以直接使用浏览器直接运打开, 前缀是 file:// , 不可以通过这样的协议去加载模块文件, 会报错  可以安装一个live serve-->
+  <script src="./main.js" type="module"></script>  
 </body>
 </html>

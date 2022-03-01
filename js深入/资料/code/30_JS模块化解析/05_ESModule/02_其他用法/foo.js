@@ -17,7 +17,7 @@ function foo() {
   console.log("foo function")
 }
 
-export {
+export {   // 这里不是一个对象, 而是一种语法
   name,
   age,
   foo

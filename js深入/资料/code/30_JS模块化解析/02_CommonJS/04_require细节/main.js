@@ -17,4 +17,4 @@ const axios = require("axios")
 
 // axios.get()
 
-console.log(module.paths)
+console.log(module.paths) // 打印这个看一下
