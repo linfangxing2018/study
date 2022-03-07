@@ -13,7 +13,7 @@ function debounce(fn, delay, immediate = false) {
       fn.apply(this, args)
       isInvoke = true
     } else {
-      // 延迟执行
+      // 延迟执行   每次延迟执行后都应该立即执行一次
       timer = setTimeout(() => {
         // 外部传入的真正要执行的函数
         fn.apply(this, args)

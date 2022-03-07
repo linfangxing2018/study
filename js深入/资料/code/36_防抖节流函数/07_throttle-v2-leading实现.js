@@ -1,3 +1,4 @@
+// leading: true 到一定间隔发送后 再输入的话立即触发一次
 function throttle(fn, interval, options = { leading: true, trailing: false }) {
   // 1.记录上一次的开始时间
   const { leading, trailing } = options

@@ -24,7 +24,8 @@ console.log(info2.age)
 obj.friends.name = "james"
 console.log(info2.friends.name)
 
-// 3.stringify和parse来实现
+// 3.stringify和parse来实现深拷贝
+// 缺点: 如果对象里面有函数的话, JSON序列化的时候函数会被忽略
 const jsonString = JSON.stringify(obj)
 console.log(jsonString)
 const info3 = JSON.parse(jsonString)

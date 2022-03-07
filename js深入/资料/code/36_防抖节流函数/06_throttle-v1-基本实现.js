@@ -12,7 +12,7 @@ function throttle(fn, interval, options) {
     const remainTime = interval - (nowTime - lastTime)
     if (remainTime <= 0) {
       // 2.3.真正触发函数
-      fn()
+      fn()   // 一定会先触发一次
       // 2.4.保留上次触发的时间
       lastTime = nowTime
     }

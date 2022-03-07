@@ -7,6 +7,7 @@ function debounce(fn, delay) {
     // 取消上一次的定时器
     if (timer) clearTimeout(timer)
     // 延迟执行
+    // 定时器的编号。这个值可以传递给clearTimeout()来取消该定时器。
     timer = setTimeout(() => {
       // 外部传入的真正要执行的函数
       fn()

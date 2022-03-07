@@ -18,4 +18,6 @@ strongEl.textContent = "我是strong元素"
 divEl.appendChild(strongEl)
 
 // 注意事项: document对象
+document.appendChild(strongEl)  // 虽然有这个方法，但是浏览器不允许这样添加，不知道要添加到哪里去
+
 document.body.appendChild(strongEl)

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./01.js"></script>
+  
+</head>
+<body>
+  <input type="text">
+  <button id="btn">取消</button>
+  <script>
+    
+    let index = 0
+    const inputTag = document.querySelector("input")
+    function inputChange (event) {
+      console.log(`第${++index}次`,this, event)
+      return 'aaaaaaa'   // 有返回值
+    }
+    const _debounce = debounce(inputChange, 5000, true, res => {
+      console.log(res,'函数返回值')
+    })
+    const tempCallback = () => {
+      _debounce().then(res => {
+        console.log('promise返回值', res)
+      })
+    }
+    inputTag.oninput = tempCallback  // target.oninput = functionRef;functionRef是一个函数名或函数表达式。该函数接收InputEvent 对象作为唯一参数。
+    // 相当于
+    // inputTag.oninput = event => {
+    //   console.log(event)
+    // }
+
+   
+    const cancel = document.getElementById("btn")
+    cancel.onclick = function () {
+      _debounce.cancel()
+    }
+  </script>
+</body>
+</html>
