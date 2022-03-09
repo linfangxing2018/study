@@ -1,4 +1,7 @@
-// leading: true 到一定间隔发送后 再输入的话立即触发一次
+// 默认的话第一次一定会触发一次, 因为一开始nowTime非常大
+// leading: false 第一次不触发
+// 如果有很多可选参数的话, 可以用一个对象   
+// trailing 首次/最后一次输入要不要触发(没达到时间)  默认的话最后一次输入不达到时间是不触发的
 function throttle(fn, interval, options = { leading: true, trailing: false }) {
   // 1.记录上一次的开始时间
   const { leading, trailing } = options

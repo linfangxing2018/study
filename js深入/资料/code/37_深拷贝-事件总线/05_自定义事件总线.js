@@ -1,8 +1,14 @@
+// github hy_event_loop
+// on监听, emit 触发, off 移除
+// vue2提供 eventbus功能, vue3移除
 class HYEventBus {
   constructor() {
     this.eventBus = {}
   }
 
+  // eventCallback 回调函数 是监听到emit触发后执行的函数 
+  // on, emit 配合来用
+  // 同一个eventName 可以绑定不同回调函数
   on(eventName, eventCallback, thisArg) {
     let handlers = this.eventBus[eventName]
     if (!handlers) {
@@ -11,14 +17,14 @@ class HYEventBus {
     }
     handlers.push({
       eventCallback,
-      thisArg
+      thisArg  // this指向
     })
   }
 
   off(eventName, eventCallback) {
     const handlers = this.eventBus[eventName]
     if (!handlers) return
-    const newHandlers = [...handlers]
+    const newHandlers = [...handlers]  
     for (let i = 0; i < newHandlers.length; i++) {
       const handler = newHandlers[i]
       if (handler.eventCallback === eventCallback) {
@@ -26,6 +32,9 @@ class HYEventBus {
         handlers.splice(index, 1)
       }
     }
+    // handlers = handlers.filter(item => {
+    //   return item !== eventCallback
+    // })
   }
 
   emit(eventName, ...payload) {
@@ -41,7 +50,7 @@ const eventBus = new HYEventBus()
 
 // main.js
 eventBus.on("abc", function() {
-  console.log("监听abc1", this)
+  console.log("监听abc1", this)   
 }, {name: "why"})
 
 const handleCallback = function() {

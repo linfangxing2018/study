@@ -32,8 +32,10 @@
     const debounceChange = debounce(inputChange, 3000, false, (res) => {
       console.log("拿到真正执行函数的返回值:", res)
     })
-    const tempCallback = () => {
-      debounceChange().then(res => {
+    const tempCallback = (...args) => {
+      // 这样执行this指向window
+      // debounceChange().then({})
+      debounceChange.apply('inputEl', args).then(res => {
         console.log("Promise的返回值结果:", res)
       })
     }

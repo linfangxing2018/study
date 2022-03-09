@@ -31,12 +31,12 @@ function deepClone(originValue, map = new WeakMap()) {
     return originValue
   }
   if (map.has(originValue)) {
-    return map.get(originValue)
+    return map.get(originValue)  // 循环引用, 指向同一个对象 见 39行
   }
 
   // 判断传入的对象是数组, 还是对象
   const newObject = Array.isArray(originValue) ? []: {}
-  map.set(originValue, newObject)
+  map.set(originValue, newObject)    // 循环引用, 指向同一个对象
   for (const key in originValue) {
     newObject[key] = deepClone(originValue[key], map)
   }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>节流</title>
+  <script src="./节流练习.js"></script>
+</head>
+<body>
+  <input type="text">
+  <script>
+    let count = 0
+    const inputChange = function (event) {
+      console.log(`第${++count}次,`, this, event)
+    }
+    const inputTag = document.querySelector("input")
+    inputTag.oninput = throttle(inputChange, 1000, {leading: false, trailing: true})
+  </script>
+</body>
+</html>

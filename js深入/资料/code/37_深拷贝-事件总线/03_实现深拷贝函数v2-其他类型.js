@@ -30,7 +30,7 @@ function deepClone(originValue) {
   }
 
   // 判断传入的对象是数组, 还是对象
-  const newObject = Array.isArray(originValue) ? []: {}
+  const newObject = Array.isArray(originValue) ? []: {} // 不做判断都是用 {}的话, 如果对象中有数组,for of到时候转换出 {'0': 123, '1': 234}
   for (const key in originValue) {
     newObject[key] = deepClone(originValue[key])
   }
