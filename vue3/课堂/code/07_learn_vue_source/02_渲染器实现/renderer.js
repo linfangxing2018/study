@@ -84,10 +84,10 @@ const patch = (n1, n2) => {
       // 边界情况 (edge case)
       if (typeof oldChildren === "string") {
         if (newChidlren !== oldChildren) {
-          el.textContent = newChidlren
+          el.textContent = newChidlren   //  textContent属性表示一个节点及其后代的文本内容
         }
       } else {
-        el.innerHTML = newChidlren;
+        el.innerHTML = newChidlren;   // innerHTML 返回 HTML  textContent 通常具有更好的性能，因为文本不会被解析为HTML 使用 textContent 可以防止 XSS 攻击。
       }
     } else { // 情况二: newChildren本身是一个数组
       if (typeof oldChildren === "string") {

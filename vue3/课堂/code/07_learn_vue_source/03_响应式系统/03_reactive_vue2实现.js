@@ -16,8 +16,9 @@ class Dep {
   }
 }
 
-let activeEffect = null;
+let activeEffect = null; // 闭包 
 function watchEffect(effect) {
+  // 不用再依赖 effect
   activeEffect = effect;
   effect();
   activeEffect = null;

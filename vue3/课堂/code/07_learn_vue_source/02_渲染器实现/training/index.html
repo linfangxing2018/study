@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渲染器实现</title>
+</head>
+<body>
+  <!-- 创建好后挂载到这个节点 -->
+  <div id="app"></div> 
+  
+  <script src="./renderer.js"></script>
+
+  <script>
+    //  通过h函数创建vnode
+    const vnode = h("div", {class: 'lin'}, [
+      h("span", null, '我是靓仔'),
+      h("button", {onClick: function() {}}, 'change')
+    ])
+    
+    // 将vode挂载到真实dom
+    mount(vnode, document.querySelector("#app"))
+    setTimeout(() => {
+      const vnode2 = h("div", {class: 'jin', onClick: function() {console.log("我是靓仔")}}, [
+        h("button", {class: "zhang"}, '按钮')
+      ])
+      patch(vnode, vnode2)
+    }, 2000)
+    
+  </script>
+</body>
+</html>
