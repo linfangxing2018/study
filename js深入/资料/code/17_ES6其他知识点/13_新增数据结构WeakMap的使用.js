@@ -1,8 +1,10 @@
 
-const obj = {name: "obj1"}
+let obj = {name: "obj1"}
 // 1.WeakMap和Map的区别二:
 const map = new Map()
 map.set(obj, "aaa")
+console.log(map.get(obj))
+
 
 const weakMap = new WeakMap()
 weakMap.set(obj, "aaa")

@@ -61,3 +61,4 @@ objProxy.name = "james"
 objProxy.name = "curry"
 
 objProxy.age = 100
+console.log(obj,'222222')

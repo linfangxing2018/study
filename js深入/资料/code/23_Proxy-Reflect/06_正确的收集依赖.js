@@ -51,7 +51,7 @@ const obj = {
 // 监听对象的属性变量: Proxy(vue3)/Object.defineProperty(vue2)
 const objProxy = new Proxy(obj, {
   get: function(target, key, receiver) {
-    console.log(1234)
+    console.log(111)
     // 根据target.key获取对应的depend
     const depend = getDepend(target, key)
     // 给depend对象中添加响应函数
@@ -67,41 +67,36 @@ const objProxy = new Proxy(obj, {
   }
 })
 
-// watchFn(function() {
-//   console.log("-----第一个name函数开始------")
-//   console.log("你好啊, 李银河")
-//   console.log("Hello World")
-//   console.log(objProxy.name) // 100行
-//   console.log("-----第一个name函数结束------")
-// })
+watchFn(function() {
+  console.log("-----第一个name函数开始------")
+  console.log("你好啊, 李银河")
+  console.log("Hello World")
+  console.log(objProxy.name) // 100行
+  console.log("-----第一个name函数结束------")
+})
 
-// watchFn(function() {
-//   console.log(objProxy.name, "demo function -------")
-// })
+watchFn(function() {
+  console.log(objProxy.name, "demo function -------")
+})
 
-// watchFn(function() {
-//   console.log(objProxy.age, "age 发生变化是需要执行的----1")
-// })
+watchFn(function() {
+  console.log(objProxy.age, "age 发生变化是需要执行的----1")
+})
 
-// watchFn(function() {
-//   console.log(objProxy.age, "age 发生变化是需要执行的----2")
-// })
+watchFn(function() {
+  console.log(objProxy.age, "age 发生变化是需要执行的----2")
+})
 
-// watchFn(function() {
-//   console.log(objProxy.name, "新函数")
-//   console.log(objProxy.age, "新函数")
-// })
+watchFn(function() {
+  console.log(objProxy.name, "新函数")
+  console.log(objProxy.age, "新函数")
+})
 
-// console.log("------------------------------改变obj的name值")
+console.log("------------------------------改变obj的name值")
 
-// objProxy.name = "kobe"
+objProxy.name = "kobe"
 // objProxy.name = "james"
 
 // objProxy.age = 20
 // objProxy.age = 30
-watchFn(function() {
-  console.log(obj.name, "新函数")
-  console.log(obj.age, "新函数")
-})
-obj.name = 'lin'
 

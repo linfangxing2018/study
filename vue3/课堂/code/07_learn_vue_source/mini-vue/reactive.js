@@ -46,6 +46,7 @@ function getDep(target, key) {
 
 
 // vue3对raw进行数据劫持
+// 返回的是一个Proxy对象 对Proxy对象进行操作也会改变原对象(代理)
 function reactive(raw) {
   return new Proxy(raw, {
     get(target, key) {

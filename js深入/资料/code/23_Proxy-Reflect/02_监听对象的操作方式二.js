@@ -2,7 +2,7 @@ const obj = {
   name: "why",
   age: 18
 }
-
+// 对整个对象进行 代理
 const objProxy = new Proxy(obj, {
   // 获取值时的捕获器
   get: function(target, key) {

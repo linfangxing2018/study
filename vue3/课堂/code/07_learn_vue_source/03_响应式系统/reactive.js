@@ -46,6 +46,22 @@ function getDep(target, key) {
 
 
 // vue3对raw进行数据劫持
+// vue3跟vue2不一样, vue2使用 Object.defineProperty对对象本身进行劫持
+// vue3使用的是proxy, 代理对象 , 代理对象改变, 原对象也会改变
+// vue3 setup写法
+// import { reactive } from 'vue'
+export default {
+  setup() {
+    let proxyObj = reactive({
+      name: 'lin'
+    })
+    proxyObj.name = 'lin'
+    return {
+      proxyObj
+    }
+  }
+}
+
 function reactive(raw) {
   return new Proxy(raw, {
     get(target, key) {
@@ -67,7 +83,8 @@ function reactive(raw) {
 
 // // 测试代码
 // const info = reactive({counter: 100, name: "why"});
-// const foo = reactive({height: 1.88});
+// 返回的对象是响应式对象 修改foo就会触发
+const foo = reactive({height: 1.88});
 
 // // watchEffect1
 // watchEffect(function () {
@@ -88,7 +105,10 @@ function reactive(raw) {
 //   console.log("effect4:", foo.height);
 // })
 
+
+
 // info.counter++;
 // info.name = "why";
 
-// foo.height = 2;
+foo.height = 2;
+
