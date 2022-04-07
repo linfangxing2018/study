@@ -1,6 +1,7 @@
 // hook: useState
 // const [counter, setCounter] = {counter: , setCounter:}
 
+// <T> 泛型，可以根据传入的类型来决定
 function useState<T>(state: T) {
   let currentState = state
   const changeState = (newState: T) => {

@@ -7,6 +7,29 @@
   <title>响应式系统</title>
 </head>
 <body>
-  
+  <div id="app"></div>
+  <script src="../../02_渲染器实现/renderer.js"></script>
+  <script src="../../03_响应式系统/reactive.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    // 创建根组件
+    const App = {
+      data: reactive({
+        counter: 0
+      }),
+      render() {
+        return h("div", {class: 'lin'}, [
+          h("div", {class: 'text'}, `${this.data.counter}`),
+          h("button", {onClick: () => {
+            this.data.counter++
+            console.log(this.data.counter)
+          }}, '+')
+        ])
+      }
+    }
+    // 挂载根组件
+    const app = createApp(App)
+    app.mount("#app")
+  </script>
 </body>
 </html>

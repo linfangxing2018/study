@@ -1,4 +1,5 @@
 class Person {
+  // 私有属性
   private name: string = ""
 
   // 封装了两个方法, 通过方法来访问name

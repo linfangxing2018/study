@@ -6,7 +6,7 @@ function useState(state: any) {
   const changeState = (newState: any) => {
     currentState = newState
   }
-
+  // (newState: any) => void  函数类型
   const tuple: [any, (newState: any) => void] = [currentState, changeState]
   return tuple
 }

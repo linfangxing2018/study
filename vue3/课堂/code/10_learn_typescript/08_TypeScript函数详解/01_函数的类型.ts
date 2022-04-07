@@ -9,6 +9,7 @@ function bar(fn: FooFnType) {
 bar(foo)
 
 // 2.定义常量时, 编写函数的类型
+// type AddFnType = (num1: number, num2: number) => void 写void不够严谨，void返回可以是null，undefined， string等
 type AddFnType = (num1: number, num2: number) => number
 const add: AddFnType = (a1: number, a2: number) => {
   return a1 + a2

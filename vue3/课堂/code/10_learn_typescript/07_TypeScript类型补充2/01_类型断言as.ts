@@ -1,5 +1,8 @@
 // <img id="why"/>
 
+const el1 = document.getElementById("why") // HTMLElement  范围太广
+el1.src = "url地址"
+// 如果确定具体类型
 // 1.类型断言 as
 const el = document.getElementById("why") as HTMLImageElement
 el.src = "url地址"
@@ -27,5 +30,6 @@ sayHello(stu)
 // 3.了解: as any/unknown
 const message = "Hello World"
 // const num: number = (message as unknown) as number
+export {}
 
 

@@ -3,7 +3,7 @@ class Person {
   constructor(name: string) {
     this._name = name
   }
-
+  // 访问私有属性的时候推荐使用访问器
   // 访问器setter/getter
   // setter
   set name(newName) {

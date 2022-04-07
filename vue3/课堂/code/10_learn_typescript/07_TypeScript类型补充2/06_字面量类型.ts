@@ -3,7 +3,7 @@
 const message: "Hello World" = "Hello World"
 
 // let num: 123 = 123
-// num = 321
+// num = 321   // 只能赋值为123
 
 
 // 字面量类型的意义, 就是必须结合联合类型

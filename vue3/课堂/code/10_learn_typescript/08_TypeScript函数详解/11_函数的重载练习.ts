@@ -1,3 +1,4 @@
+// 能用联合就用联合
 // 实现方式一: 联合类型
 function getLength(args: string | any[]) {
   return args.length

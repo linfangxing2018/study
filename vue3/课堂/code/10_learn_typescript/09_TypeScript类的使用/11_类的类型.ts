@@ -19,7 +19,7 @@ function printPerson(p: Person) {
 }
 
 printPerson(new Person())
-printPerson({name: "kobe", eating: function() {}})
+printPerson({name: "kobe", eating: function() {}})   // 这样传也是可以的
 
 export {}
 

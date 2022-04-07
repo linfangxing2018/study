@@ -21,3 +21,4 @@ if (p.friend) {
 } 
 
 // p.name = "123"
+export {}

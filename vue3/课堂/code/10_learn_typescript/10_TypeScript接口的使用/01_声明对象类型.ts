@@ -4,6 +4,8 @@
 // 另外一种方式声明对象类型: 接口interface
 // 在其中可以定义可选类型
 // 也可以定义只读属性
+
+// 别的语言里面，interface命名有一个规范， 在接口名前面加一个 I
 interface IInfoType {
   readonly name: string
   age: number

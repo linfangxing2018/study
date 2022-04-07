@@ -1,4 +1,7 @@
 class Person {
+  // // 如果下面constructor没有 类型注解/any 要给默认值
+  // name: string = ''
+  // age: number = 123
   name: string
   age: number
 

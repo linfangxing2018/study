@@ -50,17 +50,17 @@ function getDep(target, key) {
 // vue3使用的是proxy, 代理对象 , 代理对象改变, 原对象也会改变
 // vue3 setup写法
 // import { reactive } from 'vue'
-export default {
-  setup() {
-    let proxyObj = reactive({
-      name: 'lin'
-    })
-    proxyObj.name = 'lin'
-    return {
-      proxyObj
-    }
-  }
-}
+// export default {
+//   setup() {
+//     let proxyObj = reactive({
+//       name: 'lin'
+//     })
+//     proxyObj.name = 'lin'
+//     return {
+//       proxyObj
+//     }
+//   }
+// }
 
 function reactive(raw) {
   return new Proxy(raw, {
